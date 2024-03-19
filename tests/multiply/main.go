@@ -34,7 +34,7 @@ func main() {
 		fmt.Printf("Error creating library: %v\n", err)
 		return
 	}
-	fmt.Printf("Created library with : %d functions\n", len(lib.GetFTable()))
+	fmt.Printf("Created library with : %d functions\n", lib.GetFTableCount())
 
 	// Initialize Python interpreter
 	os.Setenv("PYTHONHOME", env.EnvPath)

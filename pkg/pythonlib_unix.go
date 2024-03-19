@@ -10,6 +10,12 @@ import (
 	"unsafe"
 )
 
+type PythonLib struct {
+	FTable        map[string]unsafe.Pointer
+	FunctionDefs  []PyFunction
+	FunctionNames []string
+}
+
 /*
 #cgo LDFLAGS: -ldl
 
@@ -173,8 +179,8 @@ func NewPythonLib(libpath string, pyhome string, pypkg string, version string) (
 	return retv, nil
 }
 
-func (p *PythonLib) GetFTable() map[string]unsafe.Pointer {
-	return p.FTable
+func (p *PythonLib) GetFTableCount() int {
+	return len(p.FTable)
 }
 
 func (p *PythonLib) invoke0(f string) uintptr {
