@@ -10,12 +10,6 @@ import (
 	"unsafe"
 )
 
-type PythonLib struct {
-	FTable        map[string]unsafe.Pointer
-	FunctionDefs  []PyFunction
-	FunctionNames []string
-}
-
 /*
 #cgo LDFLAGS: -ldl
 
@@ -92,6 +86,12 @@ int run_python_script(const char* script, void * f) {
 
 */
 import "C"
+
+type PythonLib struct {
+	FTable        map[string]unsafe.Pointer
+	FunctionDefs  []PyFunction
+	FunctionNames []string
+}
 
 func ToPtr(a uintptr) unsafe.Pointer {
 	return unsafe.Pointer(a)

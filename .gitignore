@@ -33,5 +33,7 @@ jsontest
 
 ### jetbrain goland
 .idea
+
+### python
 micromamba/
 __pycache__/

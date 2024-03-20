@@ -111,7 +111,7 @@ func main() {
 	}
 
 	// we'll use the 39 env to generate the ctags json output for all the python versions
-	envs["39"].PipInstallPackage("pycparser")
+	envs["39"].PipInstallPackage("pycparser", "", "")
 
 	// patch the pyport.h file for each environment
 	for k, env := range envs {
