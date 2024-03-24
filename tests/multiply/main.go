@@ -18,7 +18,7 @@ func main() {
 	}
 
 	// Specify the binary folder to place micromamba in
-	rootDirectory := filepath.Join(cwd, "micromamba")
+	rootDirectory := filepath.Join(cwd, "..", "micromamba")
 	fmt.Println("Creating Kinda repo at: ", rootDirectory)
 	version := "3.10"
 	env, err := kinda.CreateEnvironment("myenv"+version, rootDirectory, version, "conda-forge")

@@ -2,7 +2,6 @@ package pkg
 
 import (
 	_ "embed"
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -10,6 +9,8 @@ import (
 	"path/filepath"
 	"syscall"
 	"unsafe"
+
+	kinda "github.com/richinsley/kinda/pkg"
 )
 
 var (
@@ -22,9 +23,12 @@ var (
 )
 
 type PythonLib struct {
+	CTags         *PyCtags
 	FTable        map[string]*syscall.Proc
 	FunctionDefs  []PyFunction
 	FunctionNames []string
+	Environment   *kinda.Environment
+	PyConfig      unsafe.Pointer
 	DLL           *syscall.DLL
 }
 
@@ -64,25 +68,6 @@ func loadPythonFunctions(libpath string, functionNames []string, functionPointer
 	}
 
 	return dll, nil
-}
-
-//go:embed ctags/ctags-39.json
-var functionsJson39 []byte
-
-//go:embed ctags/ctags-310.json
-var functionsJson310 []byte
-
-//go:embed ctags/ctags-311.json
-var functionsJson311 []byte
-
-//go:embed ctags/ctags-312.json
-var functionsJson312 []byte
-
-var pythonCtags = map[string][]byte{
-	"3.9":  functionsJson39,
-	"3.10": functionsJson310,
-	"3.11": functionsJson311,
-	"3.12": functionsJson312,
 }
 
 const (
@@ -139,20 +124,32 @@ func FreeString(s uintptr) {
 	VirtualFree(s)
 }
 
-func NewPythonLib(libpath string, pyhome string, pypkg string, version string) (IPythonLib, error) {
-	retv := &PythonLib{
-		FTable: make(map[string]*syscall.Proc),
-	}
-
-	// Parse the JSON data into the FunctionDefs
-	err := json.Unmarshal(pythonCtags[version], &retv.FunctionDefs)
+func NewPythonLib(env *kinda.Environment) (IPythonLib, error) {
+	retv, err := NewPythonLibFromPaths(env.PythonLibPath, env.EnvPath, env.SitePackagesPath, env.PythonVersion.MinorString())
 	if err != nil {
 		return nil, err
 	}
 
+	myenv := retv.(*PythonLib)
+	myenv.Environment = env
+
+	return retv, nil
+}
+
+func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version string) (IPythonLib, error) {
+	ctags, err := GetPlatformCtags(version)
+	if err != nil {
+		return nil, err
+	}
+
+	retv := &PythonLib{
+		CTags:  ctags,
+		FTable: make(map[string]*syscall.Proc),
+	}
+
 	// extract function names
-	retv.FunctionNames = make([]string, len(retv.FunctionDefs))
-	for i, v := range retv.FunctionDefs {
+	retv.FunctionNames = make([]string, len(retv.CTags.Functions))
+	for i, v := range retv.CTags.Functions {
 		retv.FunctionNames[i] = v.Name
 	}
 
@@ -169,11 +166,11 @@ func NewPythonLib(libpath string, pyhome string, pypkg string, version string) (
 	// Check for NULL pointers and use the functions...
 	for i, ptr := range procs {
 		retv.FTable[retv.FunctionNames[i]] = ptr
-		if ptr == nil {
-			log.Printf("Function %s failed to load.", retv.FunctionNames[i])
-		} else {
-			log.Printf("Function %s loaded.", retv.FunctionNames[i])
-		}
+		// if ptr == nil {
+		// 	log.Printf("Function %s failed to load.", retv.FunctionNames[i])
+		// } else {
+		// 	log.Printf("Function %s loaded.", retv.FunctionNames[i])
+		// }
 	}
 
 	return retv, nil
@@ -202,4 +199,25 @@ func (p *PythonLib) Invoke(f string, a ...uintptr) uintptr {
 	// math.Float64frombits(uint64(r2)).
 	retv, _, _ := fn.Call(a...)
 	return retv
+}
+
+func (p *PythonLib) AllocBuffer(size int) uintptr {
+	retv, _ := VirtualAlloc(uintptr(size))
+	return retv
+}
+
+func (p *PythonLib) FreeBuffer(addr uintptr) {
+	VirtualFree(addr)
+}
+
+func (p *PythonLib) Init(program_name string) error {
+	// we need to tell python where it's env is at
+	envpathchar := StrToPtr(p.Environment.EnvPath)
+	envpath := p.Invoke("Py_DecodeLocale", envpathchar, 0)
+	p.Invoke("Py_SetPythonHome", envpath)
+
+	// Initialize Python interpreter
+	p.Invoke("Py_Initialize")
+
+	return nil
 }

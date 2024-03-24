@@ -4,10 +4,12 @@ package pkg
 
 import (
 	_ "embed"
-	"encoding/json"
+	"fmt"
 	"log"
 	"strconv"
 	"unsafe"
+
+	kinda "github.com/richinsley/kinda/pkg"
 )
 
 /*
@@ -16,6 +18,7 @@ import (
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h> // Include stdlib.h for C.free
+#include <string.h>
 
 void* openPythonLib(const char* name) {
     return dlopen(name, RTLD_LAZY);
@@ -88,9 +91,11 @@ int run_python_script(const char* script, void * f) {
 import "C"
 
 type PythonLib struct {
+	CTags         *PyCtags
 	FTable        map[string]unsafe.Pointer
-	FunctionDefs  []PyFunction
 	FunctionNames []string
+	Environment   *kinda.Environment
+	PyConfig      unsafe.Pointer
 }
 
 func ToPtr(a uintptr) unsafe.Pointer {
@@ -109,52 +114,46 @@ func FreeString(s uintptr) {
 	C.free(unsafe.Pointer(s))
 }
 
-//go:embed ctags/ctags-39.json
-var functionsJson39 []byte
-
-//go:embed ctags/ctags-310.json
-var functionsJson310 []byte
-
-//go:embed ctags/ctags-311.json
-var functionsJson311 []byte
-
-//go:embed ctags/ctags-312.json
-var functionsJson312 []byte
-
-var pythonCtags = map[string][]byte{
-	"3.9":  functionsJson39,
-	"3.10": functionsJson310,
-	"3.11": functionsJson311,
-	"3.12": functionsJson312,
-}
-
 // func (env *Environment) NewPythonLib() (*PythonLib, error) {
 // 	return NewPythonLib(env.PythonLibPath, env.EnvPath, env.SitePackagesPath, env.PythonVersion.MinorString())
 // }
 
-func NewPythonLib(libpath string, pyhome string, pypkg string, version string) (IPythonLib, error) {
+func NewPythonLib(env *kinda.Environment) (IPythonLib, error) {
+	retv, err := NewPythonLibFromPaths(env.PythonLibPath, env.EnvPath, env.SitePackagesPath, env.PythonVersion.MinorString())
+	if err != nil {
+		return nil, err
+	}
+
+	myenv := retv.(*PythonLib)
+	myenv.Environment = env
+
+	return retv, nil
+}
+
+func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version string) (IPythonLib, error) {
 	// os.Setenv("PYTHONHOME", "/Users/richardinsley/miniconda3/envs/py39")
 	// os.Setenv("PYTHONPATH", "/Users/richardinsley/miniconda3/envs/py39/lib/python3.9/site-packages")
 
 	// os.Setenv("PYTHONHOME", pyhome)
 	// os.Setenv("PYTHONPATH", pypkg)
-	retv := &PythonLib{
-		FTable: make(map[string]unsafe.Pointer),
-	}
 
-	// Parse the JSON data into the FunctionDefs
-	err := json.Unmarshal(pythonCtags[version], &retv.FunctionDefs)
+	ctags, err := GetPlatformCtags(version)
 	if err != nil {
 		return nil, err
 	}
 
+	retv := &PythonLib{
+		CTags:  ctags,
+		FTable: make(map[string]unsafe.Pointer),
+	}
+
 	// extract function names
-	retv.FunctionNames = make([]string, len(retv.FunctionDefs))
-	for i, v := range retv.FunctionDefs {
+	retv.FunctionNames = make([]string, len(retv.CTags.Functions))
+	for i, v := range retv.CTags.Functions {
 		retv.FunctionNames[i] = v.Name
 	}
 
-	// Prepare C arrays
+	// Prepare C function names and pointers
 	cFunctionNames := make([]*C.char, len(retv.FunctionNames))
 	for i, name := range retv.FunctionNames {
 		cFunctionNames[i] = C.CString(name)
@@ -169,11 +168,11 @@ func NewPythonLib(libpath string, pyhome string, pypkg string, version string) (
 	// Check for NULL pointers and use the functions...
 	for i, ptr := range cFunctionPointers {
 		retv.FTable[retv.FunctionNames[i]] = ptr
-		if ptr == nil {
-			log.Printf("Function %s failed to load.", retv.FunctionNames[i])
-		} else {
-			log.Printf("Function %s loaded.", retv.FunctionNames[i])
-		}
+		// if ptr == nil {
+		// 	log.Printf("Function %s failed to load.", retv.FunctionNames[i])
+		// } else {
+		// 	log.Printf("Function %s loaded.", retv.FunctionNames[i])
+		// }
 	}
 
 	return retv, nil
@@ -242,4 +241,114 @@ func (p *PythonLib) Invoke(f string, a ...uintptr) uintptr {
 	default:
 		panic("invoke " + f + " with too many arguments " + strconv.Itoa(len(a)) + ".")
 	}
+}
+
+func (p *PythonLib) AllocBuffer(size int) uintptr {
+	rptr := C.malloc(C.size_t(size))
+	// zero the buffer
+	C.memset(rptr, 0, C.size_t(size))
+
+	nptr := uintptr(rptr)
+	return nptr
+}
+
+func (p *PythonLib) FreeBuffer(addr uintptr) {
+	C.free(unsafe.Pointer(addr))
+}
+
+func (p *PythonLib) GetPyConfigPointer(member string) unsafe.Pointer {
+	// get the offset for the member
+	var offset int
+	gotit := false
+	for _, m := range p.CTags.PyConfigs.PyConfig.Members {
+		if m.Name == member {
+			gotit = true
+			offset = m.Offset
+			break
+		}
+	}
+
+	if !gotit {
+		log.Printf("Member %s not found in PyConfig struct.", member)
+		return unsafe.Pointer(nil)
+	}
+
+	// get the pointer 5411727168 + 248 = 5411727416 (0x142906838)
+	fmt.Printf("PyConfig: %p Offset P %p, Offset V %d \n", p.PyConfig, unsafe.Pointer(uintptr(offset)), offset)
+	uptr := unsafe.Pointer(uintptr(p.PyConfig) + uintptr(offset))
+	return uptr
+}
+
+func (p *PythonLib) SetPyConfigPointer(member string, ptr uintptr) {
+	// get the offset for the member
+	var offset int
+	gotit := false
+	for _, m := range p.CTags.PyConfigs.PyConfig.Members {
+		if m.Name == member {
+			gotit = true
+			offset = m.Offset
+			break
+		}
+	}
+
+	if !gotit {
+		log.Printf("Member %s not found in PyConfig struct.", member)
+		return
+	}
+
+	// set the pointer
+	*(*uintptr)(unsafe.Pointer(uintptr(p.PyConfig) + uintptr(offset))) = ptr
+}
+
+func (p *PythonLib) Init(program_name string) error {
+	return nil
+	/*
+		fmt.Printf("There are %d members in the PyConfig struct.\n", len(p.CTags.PyConfigs.PyConfig.Members))
+		var PyConfig uintptr
+		if p.Environment != nil {
+			// create a PyConfig struct and initialize it as an Environment
+			// 368 should be 392
+
+			// truesize := 0
+			// for _, m := range p.CTags.PyConfigs.PyConfig.Members {
+			// 	truesize += m.Size
+			// }
+
+			// if truesize != p.CTags.PyConfigs.PyConfig.Size {
+			// 	log.Printf("PyConfig struct size mismatch: %d != %d\n", truesize, p.CTags.PyConfigs.PyConfig.Size)
+			// }
+
+			PyConfig = p.AllocBuffer(p.CTags.PyConfigs.PyConfig.Size + 256)
+			p.PyConfig = ToPtr(PyConfig)
+			p.Invoke("PyConfig_InitPythonConfig", uintptr(PyConfig))
+
+			// set the home and program name in the PyConfig struct
+			envpathchar := StrToPtr(p.Environment.EnvPath)
+			envpath := p.Invoke("Py_DecodeLocale", envpathchar, 0)
+			p.SetPyConfigPointer("home", envpath)
+
+			pnamechar := StrToPtr(program_name)
+			pname := p.Invoke("Py_DecodeLocale", pnamechar, 0)
+			p.SetPyConfigPointer("program_name", pname)
+
+			status := p.Invoke("Py_InitializeFromConfig", uintptr(PyConfig))
+			if p.Invoke("PyStatus_Exception", status) != 0 {
+				return fmt.Errorf("Py_InitializeFromConfig failed with status %d", status)
+			}
+
+			// Read the configuration based on the current settings (including command line arguments)
+			// status := p.Invoke("PyConfig_Read", uintptr(PyConfig))
+			// if status != 0 {
+			// 	return errors.New("PyConfig_Read failed")
+			// }
+
+			// Set the Python home in the PyConfig struct (depricated in 3.10)
+			// p.Invoke("Py_SetPythonHome", envpath)
+		}
+
+		// Initialize Python interpreter
+		p.Invoke("Py_Initialize")
+
+		return nil
+	*/
 }

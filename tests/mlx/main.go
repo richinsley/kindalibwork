@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	kinda "github.com/richinsley/kinda/pkg"
+	pylib "github.com/richinsley/kindalib/pkg"
 )
 
 func main() {
@@ -17,7 +18,7 @@ func main() {
 	}
 
 	// Specify the binary folder to place micromamba in
-	rootDirectory := filepath.Join(cwd, "micromamba")
+	rootDirectory := filepath.Join(cwd, "..", "micromamba")
 	fmt.Println("Creating Kinda repo at: ", rootDirectory)
 	version := "3.10"
 	env, err := kinda.CreateEnvironment("myenv"+version, rootDirectory, version, "conda-forge")
@@ -27,8 +28,7 @@ func main() {
 	}
 	fmt.Printf("Created environment: %s\n", env.Name)
 
-	// installing mlx
-	// err = env.PipInstallPackage("mlx")
+	// installing mlx with micromamba
 	err = env.MicromambaInstallPackage("mlx", "conda-forge")
 	if err != nil {
 		fmt.Printf("Error installing mlx: %v\n", err)
@@ -36,12 +36,12 @@ func main() {
 	}
 
 	// test create a library
-	lib, err := env.NewPythonLib()
+	lib, err := pylib.NewPythonLib(env)
 	if err != nil {
 		fmt.Printf("Error creating library: %v\n", err)
 		return
 	}
-	fmt.Printf("Created library with : %d functions\n", len(lib.FTable))
+	fmt.Printf("Created library with : %d functions\n", lib.GetFTableCount())
 
 	// Initialize Python interpreter
 	os.Setenv("PYTHONHOME", env.EnvPath)
@@ -59,7 +59,7 @@ func main() {
 	// name "multiply".  We can do this becuase we called PySys_SetArgv.  The module name MUST be in a python string.
 	// We create a python string with "PyUnicode_DecodeFSDefault"
 	mpath := "multiply"
-	sptr := kinda.StrToPtr(mpath)
+	sptr := pylib.StrToPtr(mpath)
 	pName := lib.Invoke("PyUnicode_DecodeFSDefault", sptr)
 
 	// use "PyImport_Import" to load the module
@@ -68,7 +68,7 @@ func main() {
 	if pModule != 0 {
 		// find the multiply function in the module
 		funcStr := "multiply"
-		fsptr := kinda.StrToPtr(funcStr)
+		fsptr := pylib.StrToPtr(funcStr)
 		pFunc := lib.Invoke("PyObject_GetAttrString", pModule, fsptr)
 
 		// make sure the returned function is callable

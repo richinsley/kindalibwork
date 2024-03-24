@@ -37,3 +37,13 @@ jsontest
 ### python
 micromamba/
 __pycache__/
+
+genctags/micromamba
+genctags/passone/micromamba
+genctags/passtwo/micromamba
+genctags/passone/pycparser
+genctags/pycparser
+genctags/passtwo/pkg
+genctags/platform_ctags
+
+
