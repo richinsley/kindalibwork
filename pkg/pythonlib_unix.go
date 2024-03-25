@@ -14,11 +14,23 @@ import (
 
 /*
 #cgo LDFLAGS: -ldl
-
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h> // Include stdlib.h for C.free
 #include <string.h>
+
+// define PyStatus.  This is a struct that is used to return status from Python functions
+// it is the equivalent of the PyStatus struct in the C code and is the same in 3.9, 3.10, 3.11, and 3.12
+typedef struct {
+    enum {
+        _PyStatus_TYPE_OK=0,
+        _PyStatus_TYPE_ERROR=1,
+        _PyStatus_TYPE_EXIT=2
+    } _type;
+    const char *func;
+    const char *err_msg;
+    int exitcode;
+} PyStatus;
 
 void* openPythonLib(const char* name) {
     return dlopen(name, RTLD_LAZY);
@@ -82,20 +94,37 @@ static uint64_t Syscall8(void* addr, void* p1, void* p2, void* p3, void* p4, voi
 	return ((uint64_t(*)(void*,void*,void*,void*,void*,void*,void*,void*))addr)(p1, p2, p3, p4, p5, p6,p7,p8);
 }
 
-int run_python_script(const char* script, void * f) {
-	int (*fun_ptr)(const char*) = f;
-	return (*fun_ptr)(script);
+// PyStatus calls
+static PyStatus PyStatusSyscall0(void* addr) {
+	return ((PyStatus(*)())addr)();
+}
+
+static PyStatus PyStatusSyscall1(void* addr, void* p1) {
+	return ((PyStatus(*)(void*))addr)(p1);
+}
+
+static PyStatus PyStatusSyscall2(void* addr, void* p1, void* p2) {
+	return ((PyStatus(*)(void*,void*))addr)(p1, p2);
+}
+
+static PyStatus PyStatusSyscall3(void* addr, void* p1, void* p2, void* p3) {
+	return ((PyStatus(*)(void*,void*,void*))addr)(p1, p2, p3);
+}
+
+static PyStatus PyStatusSyscall4(void* addr, void* p1, void* p2, void* p3, void* p4) {
+	return ((PyStatus(*)(void*,void*,void*,void*))addr)(p1, p2, p3, p4);
 }
 
 */
 import "C"
 
 type PythonLib struct {
-	CTags         *PyCtags
-	FTable        map[string]unsafe.Pointer
-	FunctionNames []string
-	Environment   *kinda.Environment
-	PyConfig      unsafe.Pointer
+	CTags             *PyCtags
+	FTable            map[string]unsafe.Pointer
+	IsFReturnPyStatus map[string]bool
+	FunctionNames     []string
+	Environment       *kinda.Environment
+	PyConfig          unsafe.Pointer
 }
 
 func ToPtr(a uintptr) unsafe.Pointer {
@@ -113,10 +142,6 @@ func StrToPtr(s string) uintptr {
 func FreeString(s uintptr) {
 	C.free(unsafe.Pointer(s))
 }
-
-// func (env *Environment) NewPythonLib() (*PythonLib, error) {
-// 	return NewPythonLib(env.PythonLibPath, env.EnvPath, env.SitePackagesPath, env.PythonVersion.MinorString())
-// }
 
 func NewPythonLib(env *kinda.Environment) (IPythonLib, error) {
 	retv, err := NewPythonLibFromPaths(env.PythonLibPath, env.EnvPath, env.SitePackagesPath, env.PythonVersion.MinorString())
@@ -143,8 +168,9 @@ func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version 
 	}
 
 	retv := &PythonLib{
-		CTags:  ctags,
-		FTable: make(map[string]unsafe.Pointer),
+		CTags:             ctags,
+		FTable:            make(map[string]unsafe.Pointer),
+		IsFReturnPyStatus: make(map[string]bool),
 	}
 
 	// extract function names
@@ -168,6 +194,13 @@ func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version 
 	// Check for NULL pointers and use the functions...
 	for i, ptr := range cFunctionPointers {
 		retv.FTable[retv.FunctionNames[i]] = ptr
+
+		if retv.CTags.Functions[i].ReturnType == "PyStatus" {
+			retv.IsFReturnPyStatus[retv.FunctionNames[i]] = true
+		} else {
+			retv.IsFReturnPyStatus[retv.FunctionNames[i]] = false
+		}
+
 		// if ptr == nil {
 		// 	log.Printf("Function %s failed to load.", retv.FunctionNames[i])
 		// } else {
@@ -183,22 +216,42 @@ func (p *PythonLib) GetFTableCount() int {
 }
 
 func (p *PythonLib) invoke0(f string) uintptr {
+	if p.IsFReturnPyStatus[f] {
+		status := C.PyStatusSyscall0(p.FTable[f])
+		return (uintptr(status._type))
+	}
 	return uintptr(C.Syscall0(p.FTable[f]))
 }
 
 func (p *PythonLib) invoke1(f string, p1 unsafe.Pointer) uintptr {
+	if p.IsFReturnPyStatus[f] {
+		status := C.PyStatusSyscall1(p.FTable[f], p1)
+		return (uintptr(status._type))
+	}
 	return uintptr(C.Syscall1(p.FTable[f], p1))
 }
 
 func (p *PythonLib) invoke2(f string, p1 unsafe.Pointer, p2 unsafe.Pointer) uintptr {
+	if p.IsFReturnPyStatus[f] {
+		status := C.PyStatusSyscall2(p.FTable[f], p1, p2)
+		return (uintptr(status._type))
+	}
 	return uintptr(C.Syscall2(p.FTable[f], p1, p2))
 }
 
 func (p *PythonLib) invoke3(f string, p1 unsafe.Pointer, p2 unsafe.Pointer, p3 unsafe.Pointer) uintptr {
+	if p.IsFReturnPyStatus[f] {
+		status := C.PyStatusSyscall3(p.FTable[f], p1, p2, p3)
+		return (uintptr(status._type))
+	}
 	return uintptr(C.Syscall3(p.FTable[f], p1, p2, p3))
 }
 
 func (p *PythonLib) invoke4(f string, p1 unsafe.Pointer, p2 unsafe.Pointer, p3 unsafe.Pointer, p4 unsafe.Pointer) uintptr {
+	if p.IsFReturnPyStatus[f] {
+		status := C.PyStatusSyscall4(p.FTable[f], p1, p2, p3, p4)
+		return (uintptr(status._type))
+	}
 	return uintptr(C.Syscall4(p.FTable[f], p1, p2, p3, p4))
 }
 
@@ -223,27 +276,28 @@ func (p *PythonLib) Invoke(f string, a ...uintptr) uintptr {
 	case 0:
 		return uintptr(p.invoke0(f))
 	case 1:
-		return uintptr(p.invoke1(f, ToPtr(a[0])))
+		return uintptr(p.invoke1(f, unsafe.Pointer(a[0])))
 	case 2:
-		return uintptr(p.invoke2(f, ToPtr(a[0]), ToPtr(a[1])))
+		return uintptr(p.invoke2(f, unsafe.Pointer(a[0]), unsafe.Pointer(a[1])))
 	case 3:
-		return uintptr(p.invoke3(f, ToPtr(a[0]), ToPtr(a[1]), ToPtr(a[2])))
+		return uintptr(p.invoke3(f, unsafe.Pointer(a[0]), unsafe.Pointer(a[1]), unsafe.Pointer(a[2])))
 	case 4:
-		return uintptr(p.invoke4(f, ToPtr(a[0]), ToPtr(a[1]), ToPtr(a[2]), ToPtr(a[3])))
+		return uintptr(p.invoke4(f, unsafe.Pointer(a[0]), unsafe.Pointer(a[1]), unsafe.Pointer(a[2]), unsafe.Pointer(a[3])))
 	case 5:
-		return uintptr(p.invoke5(f, ToPtr(a[0]), ToPtr(a[1]), ToPtr(a[2]), ToPtr(a[3]), ToPtr(a[4])))
+		return uintptr(p.invoke5(f, unsafe.Pointer(a[0]), unsafe.Pointer(a[1]), unsafe.Pointer(a[2]), unsafe.Pointer(a[3]), unsafe.Pointer(a[4])))
 	case 6:
-		return uintptr(p.invoke6(f, ToPtr(a[0]), ToPtr(a[1]), ToPtr(a[2]), ToPtr(a[3]), ToPtr(a[4]), ToPtr(a[5])))
+		return uintptr(p.invoke6(f, unsafe.Pointer(a[0]), unsafe.Pointer(a[1]), unsafe.Pointer(a[2]), unsafe.Pointer(a[3]), unsafe.Pointer(a[4]), unsafe.Pointer(a[5])))
 	case 7:
-		return uintptr(p.invoke7(f, ToPtr(a[0]), ToPtr(a[1]), ToPtr(a[2]), ToPtr(a[3]), ToPtr(a[4]), ToPtr(a[5]), ToPtr(a[6])))
+		return uintptr(p.invoke7(f, unsafe.Pointer(a[0]), unsafe.Pointer(a[1]), unsafe.Pointer(a[2]), unsafe.Pointer(a[3]), unsafe.Pointer(a[4]), unsafe.Pointer(a[5]), unsafe.Pointer(a[6])))
 	case 8:
-		return uintptr(p.invoke8(f, ToPtr(a[0]), ToPtr(a[1]), ToPtr(a[2]), ToPtr(a[3]), ToPtr(a[4]), ToPtr(a[5]), ToPtr(a[6]), ToPtr(a[7])))
+		return uintptr(p.invoke8(f, unsafe.Pointer(a[0]), unsafe.Pointer(a[1]), unsafe.Pointer(a[2]), unsafe.Pointer(a[3]), unsafe.Pointer(a[4]), unsafe.Pointer(a[5]), unsafe.Pointer(a[6]), unsafe.Pointer(a[7])))
 	default:
 		panic("invoke " + f + " with too many arguments " + strconv.Itoa(len(a)) + ".")
 	}
 }
 
 func (p *PythonLib) AllocBuffer(size int) uintptr {
+	// PyMem_RawMalloc
 	rptr := C.malloc(C.size_t(size))
 	// zero the buffer
 	C.memset(rptr, 0, C.size_t(size))
@@ -273,8 +327,7 @@ func (p *PythonLib) GetPyConfigPointer(member string) unsafe.Pointer {
 		return unsafe.Pointer(nil)
 	}
 
-	// get the pointer 5411727168 + 248 = 5411727416 (0x142906838)
-	fmt.Printf("PyConfig: %p Offset P %p, Offset V %d \n", p.PyConfig, unsafe.Pointer(uintptr(offset)), offset)
+	// get the pointer
 	uptr := unsafe.Pointer(uintptr(p.PyConfig) + uintptr(offset))
 	return uptr
 }
@@ -297,58 +350,53 @@ func (p *PythonLib) SetPyConfigPointer(member string, ptr uintptr) {
 	}
 
 	// set the pointer
-	*(*uintptr)(unsafe.Pointer(uintptr(p.PyConfig) + uintptr(offset))) = ptr
+	thepointer := unsafe.Pointer(uintptr(p.PyConfig) + uintptr(offset))
+	*(*uintptr)(thepointer) = ptr
 }
 
 func (p *PythonLib) Init(program_name string) error {
-	return nil
-	/*
-		fmt.Printf("There are %d members in the PyConfig struct.\n", len(p.CTags.PyConfigs.PyConfig.Members))
-		var PyConfig uintptr
-		if p.Environment != nil {
-			// create a PyConfig struct and initialize it as an Environment
-			// 368 should be 392
+	fmt.Printf("There are %d members in the PyConfig struct.\n", len(p.CTags.PyConfigs.PyConfig.Members))
+	var PyConfig uintptr
+	if p.Environment != nil {
+		// PyConfig = p.AllocBuffer(p.CTags.PyConfigs.PyConfig.Size + 512)
+		PyConfig = p.Invoke("PyMem_RawCalloc", uintptr(p.CTags.PyConfigs.PyConfig.Size+512))
+		// p.Invoke("PyMem_Free", ptr)
 
-			// truesize := 0
-			// for _, m := range p.CTags.PyConfigs.PyConfig.Members {
-			// 	truesize += m.Size
-			// }
+		p.PyConfig = ToPtr(PyConfig)
+		p.Invoke("PyConfig_InitPythonConfig", uintptr(PyConfig))
 
-			// if truesize != p.CTags.PyConfigs.PyConfig.Size {
-			// 	log.Printf("PyConfig struct size mismatch: %d != %d\n", truesize, p.CTags.PyConfigs.PyConfig.Size)
-			// }
+		// we need to convert argc and argv into uintptrs to pass to the C function
+		// create a slice of uintptrs to hold the arguments
+		// args := make([]uintptr, len(os.Args)+1)
+		// for i, v := range os.Args[1:] {
+		// 	args[i] = StrToPtr(v)
+		// }
+		// args[len(os.Args)] = 0
+		// args[0] = StrToPtr(p.Environment.PythonPath)
+		// argc := uintptr(len(os.Args))
+		// status := p.Invoke("PyConfig_SetBytesArgv", PyConfig, argc, uintptr(unsafe.Pointer(&args[0])))
+		// fmt.Println("PyConfig_SetBytesArgv status:", status)
 
-			PyConfig = p.AllocBuffer(p.CTags.PyConfigs.PyConfig.Size + 256)
-			p.PyConfig = ToPtr(PyConfig)
-			p.Invoke("PyConfig_InitPythonConfig", uintptr(PyConfig))
+		envpath := StringToWcharPtr(p.Environment.EnvPath)
+		p.SetPyConfigPointer("home", uintptr(envpath))
 
-			// set the home and program name in the PyConfig struct
-			envpathchar := StrToPtr(p.Environment.EnvPath)
-			envpath := p.Invoke("Py_DecodeLocale", envpathchar, 0)
-			p.SetPyConfigPointer("home", envpath)
+		pname := StringToWcharPtr(program_name)
+		p.SetPyConfigPointer("program_name", uintptr(pname))
 
-			pnamechar := StrToPtr(program_name)
-			pname := p.Invoke("Py_DecodeLocale", pnamechar, 0)
-			p.SetPyConfigPointer("program_name", pname)
-
-			status := p.Invoke("Py_InitializeFromConfig", uintptr(PyConfig))
-			if p.Invoke("PyStatus_Exception", status) != 0 {
-				return fmt.Errorf("Py_InitializeFromConfig failed with status %d", status)
-			}
-
-			// Read the configuration based on the current settings (including command line arguments)
-			// status := p.Invoke("PyConfig_Read", uintptr(PyConfig))
-			// if status != 0 {
-			// 	return errors.New("PyConfig_Read failed")
-			// }
-
-			// Set the Python home in the PyConfig struct (depricated in 3.10)
-			// p.Invoke("Py_SetPythonHome", envpath)
+		status := p.Invoke("Py_InitializeFromConfig", PyConfig)
+		if status != 0 {
+			return fmt.Errorf("Py_InitializeFromConfig failed with status %d", status)
 		}
 
+		// Read the configuration based on the current settings (including command line arguments)
+		// status := p.Invoke("PyConfig_Read", uintptr(PyConfig))
+		// if status != 0 {
+		// 	return errors.New("PyConfig_Read failed")
+		// }
+	} else {
 		// Initialize Python interpreter
 		p.Invoke("Py_Initialize")
+	}
 
-		return nil
-	*/
+	return nil
 }

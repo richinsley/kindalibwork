@@ -30,5 +30,6 @@ func GetPlatformCtags(pyversion string) (*PyCtags, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return &ctags, nil
 }
