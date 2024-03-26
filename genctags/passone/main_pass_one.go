@@ -14,6 +14,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"runtime"
 	"strings"
 
 	"github.com/go-git/go-git/v5"
@@ -239,8 +240,7 @@ func main() {
 	}
 
 	// platforms := []string{"darwin", "linux", "windows"}
-
-	platforms := []string{"darwin", "linux", "windows"}
+	platforms := []string{runtime.GOOS}
 	platform_ctags := make(map[string]*kindalib.PyCtags)
 
 	for _, platform := range platforms {
@@ -252,9 +252,17 @@ func main() {
 			return
 		}
 
+		ctag_path := "ctags"
+		if platform == "darwin" {
+			// we want the brew specific universal-ctags
+			ctag_path = "/opt/homebrew/bin/ctags"
+		} else if platform == "windows" {
+			ctag_path = "ctags.exe"
+		}
+
 		for k, env := range envs {
 			fakeheaders := filepath.Join(pycparserFolder, "utils", "fake_libc_include")
-			output, err := env.RunPythonReadCombined("ctags.py", env.PythonHeadersPath, "/opt/homebrew/bin/ctags", fakeheaders)
+			output, err := env.RunPythonReadCombined("ctags.py", env.PythonHeadersPath, ctag_path, fakeheaders)
 			if err != nil {
 				fmt.Println(output)
 				fmt.Printf("Error running ctags.py: %v\n", err)

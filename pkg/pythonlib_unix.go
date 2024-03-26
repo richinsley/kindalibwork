@@ -18,6 +18,7 @@ import (
 #include <stdio.h>
 #include <stdlib.h> // Include stdlib.h for C.free
 #include <string.h>
+#include <stdint.h>
 
 // define PyStatus.  This is a struct that is used to return status from Python functions
 // it is the equivalent of the PyStatus struct in the C code and is the same in 3.9, 3.10, 3.11, and 3.12
