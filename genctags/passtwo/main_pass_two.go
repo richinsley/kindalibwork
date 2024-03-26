@@ -28,7 +28,7 @@ func main() {
 		// default to the pkg folder
 		outputFolder = path.Join(cwd, "..", "..", "pkg", "platform_ctags", runtime.GOOS)
 	} else {
-		outputFolder = path.Join(os.Args[1], "platform_ctags", runtime.GOOS)
+		outputFolder = path.Join(cwd, "..", "..", "pkg", "platform_ctags", os.Args[1])
 	}
 
 	// Specify the binary folder to place micromamba in

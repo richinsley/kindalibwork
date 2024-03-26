@@ -10,7 +10,12 @@ func main() {
 
 	// where are we going to create the ctags folder sturcture
 	// default to the pkg folder
-	outputFolder := path.Join(cwd, "..", "..", "..", "..", "pkg", "platform_ctags", runtime.GOOS)
+	var outputFolder string
+	if len(os.Args) == 2 {
+		outputFolder = path.Join(cwd, "..", "..", "..", "..", "pkg", "platform_ctags", runtime.GOOS)
+	} else {
+		outputFolder = path.Join(cwd, "..", "..", "..", "..", "pkg", "platform_ctags", os.Args[2])
+	}
 
 	envpath := path.Join(outputFolder, fmt.Sprintf("ctags-%s.json", k))
 	PyCtags := kindalib.PyCtags{}

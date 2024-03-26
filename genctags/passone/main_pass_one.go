@@ -168,13 +168,7 @@ func main() {
 	}
 
 	// where are we going to create the ctags folder sturcture
-	var outputFolder string
-	if len(os.Args) != 2 {
-		// default to the pkg folder
-		outputFolder = path.Join(cwd, "..", "..", "pkg", "platform_ctags")
-	} else {
-		outputFolder = path.Join(os.Args[1], "platform_ctags")
-	}
+	outputFolder := path.Join(cwd, "..", "..", "pkg", "platform_ctags")
 
 	// we need to clone the pycparser repo and point to the fake headers directory
 	pycparserFolder := filepath.Join(cwd, "pycparser")
@@ -239,8 +233,12 @@ func main() {
 		}
 	}
 
-	// platforms := []string{"darwin", "linux", "windows"}
-	platforms := []string{runtime.GOOS}
+	var platforms []string
+	if len(os.Args) != 2 {
+		platforms = []string{runtime.GOOS}
+	} else {
+		platforms = []string{os.Args[1]}
+	}
 	platform_ctags := make(map[string]*kindalib.PyCtags)
 
 	for _, platform := range platforms {
@@ -257,7 +255,8 @@ func main() {
 			// we want the brew specific universal-ctags
 			ctag_path = "/opt/homebrew/bin/ctags"
 		} else if platform == "windows" {
-			ctag_path = "ctags.exe"
+			// for now, we'll generate ctags for windows on macos
+			ctag_path = "/opt/homebrew/bin/ctags"
 		}
 
 		for k, env := range envs {
