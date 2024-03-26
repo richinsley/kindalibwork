@@ -15,7 +15,7 @@ func main() {
 	cwd, _ := os.Getwd()
 	rootDirectory := filepath.Join(cwd, "..", "micromamba")
 	fmt.Println("Creating Kinda repo at: ", rootDirectory)
-	version := "3.12"
+	version := "3.11"
 	env, err := kinda.CreateEnvironment("myenv"+version, rootDirectory, version, "conda-forge")
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)

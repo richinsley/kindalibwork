@@ -35,7 +35,8 @@ typedef struct {
 
 void loadPythonFunctions(char * libpath, char** functionNames, void** functionPointers, int count) {
     char *error;
-    void* handle = dlopen(libpath, RTLD_NOW);
+	// linux needs RTLD_GLOBAL or else it will have problems resolving some symbols
+    void* handle = dlopen(libpath, RTLD_NOW | RTLD_GLOBAL);
     if (handle == NULL) {
         fprintf(stderr, "%s\n", dlerror());
         return;
@@ -341,6 +342,15 @@ func (p *PythonLib) Init(program_name string) error {
 		PyConfig = p.Invoke("PyMem_RawCalloc", uintptr(p.CTags.PyConfigs.PyConfig.Size+512))
 		p.PyConfig = ToPtr(PyConfig)
 		p.Invoke("PyConfig_InitPythonConfig", uintptr(PyConfig))
+
+		// // we need to convert argc and argv into uintptrs to pass to the C function
+		// // create a slice of uintptrs to hold the arguments
+		// args := make([]uintptr, 2)
+		// args[0] = StrToPtr(p.Environment.PythonPath)
+		// args[1] = 0
+		// argc := uintptr(1)
+		// status := p.Invoke("PyConfig_SetBytesArgv", PyConfig, argc, uintptr(unsafe.Pointer(&args[0])))
+		// fmt.Println("PyConfig_SetBytesArgv status:", status)
 
 		envpath := StringToWcharPtr(p.Environment.EnvPath)
 		p.SetPyConfigPointer("home", uintptr(envpath))
