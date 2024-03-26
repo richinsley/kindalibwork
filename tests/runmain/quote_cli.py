@@ -23,6 +23,3 @@ if __name__ == "__main__":
     else:
         category = 'inspirational'
     print_random_quote(category)
-
-    print(sys.prefix)
-    print(sys.path)

@@ -52,6 +52,7 @@ type PyCtags struct {
 
 type WcharPtr uintptr
 
+// StringToWcharPtr converts a Go string to a wchar_t*.
 func StringToWcharPtr(s string) WcharPtr {
 	if runtime.GOOS == "windows" {
 		// On Windows, use UTF-16 encoding
@@ -71,6 +72,7 @@ func StringToWcharPtr(s string) WcharPtr {
 	return WcharPtr(unsafe.Pointer(&utf32Chars[0]))
 }
 
+// WcharPtrToString converts a wchar_t* to a Go string.
 func WcharPtrToString(ptr WcharPtr) string {
 	if runtime.GOOS == "windows" {
 		// On Windows, use UTF-16 encoding

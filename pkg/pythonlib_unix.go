@@ -32,14 +32,6 @@ typedef struct {
     int exitcode;
 } PyStatus;
 
-void* openPythonLib(const char* name) {
-    return dlopen(name, RTLD_LAZY);
-}
-
-void closePythonLib(void* handle) {
-    dlclose(handle);
-}
-
 void loadPythonFunctions(char * libpath, char** functionNames, void** functionPointers, int count) {
     char *error;
     void* handle = dlopen(libpath, RTLD_NOW);
@@ -156,12 +148,6 @@ func NewPythonLib(env *kinda.Environment) (IPythonLib, error) {
 }
 
 func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version string) (IPythonLib, error) {
-	// os.Setenv("PYTHONHOME", "/Users/richardinsley/miniconda3/envs/py39")
-	// os.Setenv("PYTHONPATH", "/Users/richardinsley/miniconda3/envs/py39/lib/python3.9/site-packages")
-
-	// os.Setenv("PYTHONHOME", pyhome)
-	// os.Setenv("PYTHONPATH", pypkg)
-
 	ctags, err := GetPlatformCtags(version)
 	if err != nil {
 		return nil, err
@@ -200,12 +186,6 @@ func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version 
 		} else {
 			retv.IsFReturnPyStatus[retv.FunctionNames[i]] = false
 		}
-
-		// if ptr == nil {
-		// 	log.Printf("Function %s failed to load.", retv.FunctionNames[i])
-		// } else {
-		// 	log.Printf("Function %s loaded.", retv.FunctionNames[i])
-		// }
 	}
 
 	return retv, nil
@@ -355,27 +335,11 @@ func (p *PythonLib) SetPyConfigPointer(member string, ptr uintptr) {
 }
 
 func (p *PythonLib) Init(program_name string) error {
-	fmt.Printf("There are %d members in the PyConfig struct.\n", len(p.CTags.PyConfigs.PyConfig.Members))
 	var PyConfig uintptr
 	if p.Environment != nil {
-		// PyConfig = p.AllocBuffer(p.CTags.PyConfigs.PyConfig.Size + 512)
 		PyConfig = p.Invoke("PyMem_RawCalloc", uintptr(p.CTags.PyConfigs.PyConfig.Size+512))
-		// p.Invoke("PyMem_Free", ptr)
-
 		p.PyConfig = ToPtr(PyConfig)
 		p.Invoke("PyConfig_InitPythonConfig", uintptr(PyConfig))
-
-		// we need to convert argc and argv into uintptrs to pass to the C function
-		// create a slice of uintptrs to hold the arguments
-		// args := make([]uintptr, len(os.Args)+1)
-		// for i, v := range os.Args[1:] {
-		// 	args[i] = StrToPtr(v)
-		// }
-		// args[len(os.Args)] = 0
-		// args[0] = StrToPtr(p.Environment.PythonPath)
-		// argc := uintptr(len(os.Args))
-		// status := p.Invoke("PyConfig_SetBytesArgv", PyConfig, argc, uintptr(unsafe.Pointer(&args[0])))
-		// fmt.Println("PyConfig_SetBytesArgv status:", status)
 
 		envpath := StringToWcharPtr(p.Environment.EnvPath)
 		p.SetPyConfigPointer("home", uintptr(envpath))
@@ -388,11 +352,12 @@ func (p *PythonLib) Init(program_name string) error {
 			return fmt.Errorf("Py_InitializeFromConfig failed with status %d", status)
 		}
 
-		// Read the configuration based on the current settings (including command line arguments)
-		// status := p.Invoke("PyConfig_Read", uintptr(PyConfig))
-		// if status != 0 {
-		// 	return errors.New("PyConfig_Read failed")
-		// }
+		// unset the environment variables before we clear the config (the wchar_t* pointers belong to go)
+		p.SetPyConfigPointer("home", uintptr(0))
+		p.SetPyConfigPointer("program_name", uintptr(0))
+
+		p.Invoke("PyConfig_Clear", PyConfig)
+		p.Invoke("PyMem_RawFree", PyConfig)
 	} else {
 		// Initialize Python interpreter
 		p.Invoke("Py_Initialize")

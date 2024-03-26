@@ -14,7 +14,6 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"runtime"
 	"strings"
 
 	"github.com/go-git/go-git/v5"
@@ -193,7 +192,6 @@ func main() {
 		return
 	}
 	envs["39"].PipInstallPackage("pycparser", "", "")
-	envs["39"].PipInstallPackage("cffi", "", "")
 
 	envs["310"], err = kinda.CreateEnvironment("myenv310", rootDirectory, "3.10", "conda-forge")
 	if err != nil {
@@ -201,7 +199,6 @@ func main() {
 		return
 	}
 	envs["310"].PipInstallPackage("pycparser", "", "")
-	envs["310"].PipInstallPackage("cffi", "", "")
 
 	envs["311"], err = kinda.CreateEnvironment("myenv311", rootDirectory, "3.11", "conda-forge")
 	if err != nil {
@@ -209,7 +206,6 @@ func main() {
 		return
 	}
 	envs["311"].PipInstallPackage("pycparser", "", "")
-	envs["311"].PipInstallPackage("cffi", "", "")
 
 	envs["312"], err = kinda.CreateEnvironment("myenv312", rootDirectory, "3.12", "conda-forge")
 	if err != nil {
@@ -217,7 +213,6 @@ func main() {
 		return
 	}
 	envs["312"].PipInstallPackage("pycparser", "", "")
-	envs["312"].PipInstallPackage("cffi", "", "")
 
 	// recursively copy (not rename) the entire micromamba folder to the second pass folder
 	// this will allow us to run the second pass without having to recreate the environments
@@ -245,8 +240,7 @@ func main() {
 
 	// platforms := []string{"darwin", "linux", "windows"}
 
-	// we'll need to handle just the platform we're on for now
-	platforms := []string{runtime.GOOS}
+	platforms := []string{"darwin", "linux", "windows"}
 	platform_ctags := make(map[string]*kindalib.PyCtags)
 
 	for _, platform := range platforms {
