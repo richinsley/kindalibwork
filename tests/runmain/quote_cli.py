@@ -1,7 +1,5 @@
 import sys
-# site_packages_path = "/Users/richardinsley/Projects/comfycli/kindalib/tests/micromamba/envs/myenv3.10/lib/python3.10/site-packages"  # Adjust if needed
-# if site_packages_path not in sys.path:
-#     sys.path.append(site_packages_path)
+print(sys.path)
     
 from quote import quote
 

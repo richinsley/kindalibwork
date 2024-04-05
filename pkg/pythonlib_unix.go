@@ -46,7 +46,7 @@ void loadPythonFunctions(char * libpath, char** functionNames, void** functionPo
         dlerror(); // Clear any existing error
         functionPointers[i] = dlsym(handle, functionNames[i]);
         if ((error = dlerror()) != NULL) {
-            fprintf(stderr, "Error loading %s: %s\n", functionNames[i], error);
+            // fprintf(stderr, "Error loading %s: %s\n", functionNames[i], error);
             functionPointers[i] = NULL;
         }
     }
@@ -341,7 +341,12 @@ func (p *PythonLib) Init(program_name string) error {
 	if p.Environment != nil {
 		PyConfig = p.Invoke("PyMem_RawCalloc", uintptr(p.CTags.PyConfigs.PyConfig.Size+512))
 		p.PyConfig = ToPtr(PyConfig)
-		p.Invoke("PyConfig_InitPythonConfig", uintptr(PyConfig))
+
+		// regular python initialization
+		// p.Invoke("PyConfig_InitPythonConfig", uintptr(PyConfig))
+
+		// isolated python initialization
+		p.Invoke("PyConfig_InitIsolatedConfig", uintptr(PyConfig))
 
 		// // we need to convert argc and argv into uintptrs to pass to the C function
 		// // create a slice of uintptrs to hold the arguments

@@ -181,33 +181,33 @@ func main() {
 	rootDirectory := filepath.Join(cwd, "micromamba")
 	fmt.Println("Creating Kinda repos at: ", rootDirectory)
 	envs := make(map[string]*kinda.Environment)
-	envs["39"], err = kinda.CreateEnvironment("myenv39", rootDirectory, "3.9", "conda-forge")
+	envs["39"], err = kinda.CreateEnvironment("myenv39", rootDirectory, "3.9", "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["39"].PipInstallPackage("pycparser", "", "")
+	envs["39"].PipInstallPackage("pycparser", "", "", false)
 
-	envs["310"], err = kinda.CreateEnvironment("myenv310", rootDirectory, "3.10", "conda-forge")
+	envs["310"], err = kinda.CreateEnvironment("myenv310", rootDirectory, "3.10", "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["310"].PipInstallPackage("pycparser", "", "")
+	envs["310"].PipInstallPackage("pycparser", "", "", false)
 
-	envs["311"], err = kinda.CreateEnvironment("myenv311", rootDirectory, "3.11", "conda-forge")
+	envs["311"], err = kinda.CreateEnvironment("myenv311", rootDirectory, "3.11", "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["311"].PipInstallPackage("pycparser", "", "")
+	envs["311"].PipInstallPackage("pycparser", "", "", false)
 
-	envs["312"], err = kinda.CreateEnvironment("myenv312", rootDirectory, "3.12", "conda-forge")
+	envs["312"], err = kinda.CreateEnvironment("myenv312", rootDirectory, "3.12", "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["312"].PipInstallPackage("pycparser", "", "")
+	envs["312"].PipInstallPackage("pycparser", "", "", false)
 
 	// recursively copy (not rename) the entire micromamba folder to the second pass folder
 	// this will allow us to run the second pass without having to recreate the environments
