@@ -48,6 +48,11 @@ func init() {
 }
 
 func main() {
+	// s := sem.NewSemaphore()
+	// s.Post()
+	// s.Wait()
+	// s.Close()
+
 	// Specify the binary folder to place micromamba in
 	cwd, _ := os.Getwd()
 	rootDirectory := filepath.Join(cwd, "..", "micromamba")
