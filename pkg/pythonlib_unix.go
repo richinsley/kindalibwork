@@ -34,7 +34,7 @@ typedef struct {
 } PyStatus;
 
 // _Py_NoneStruct is the static None object in Python
-void * _Py_NoneStruct = NULL;
+static void * _Py_NoneStruct = NULL;
 
 void loadPythonFunctions(char * libpath, char** functionNames, void** functionPointers, int count) {
     char *error;
