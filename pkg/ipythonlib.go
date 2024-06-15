@@ -14,6 +14,10 @@ type IPythonLib interface {
 	AllocBuffer(size int) uintptr
 	FreeBuffer(addr uintptr)
 	Init(string) error
+	GetPyNone() unsafe.Pointer
+
+	NewPyMethodDefArray(count int) PyMethodDefArray
+	NewPyModuleDef(name string, doc string, methods *PyMethodDefArray) PyModuleDef
 }
 
 type PyFunctionParameter struct {
@@ -27,7 +31,7 @@ type PyFunction struct {
 	Parameters []PyFunctionParameter `json:"parameters"`
 }
 
-type PuConfigMember struct {
+type PyConfigMember struct {
 	Name   string `json:"name"`
 	Type   string `json:"type"`
 	Offset int    `json:"offset"`
@@ -37,17 +41,31 @@ type PuConfigMember struct {
 type PyConfig struct {
 	Name    string           `json:"name"`
 	Size    int              `json:"size"`
-	Members []PuConfigMember `json:"members"`
+	Members []PyConfigMember `json:"members"`
 }
 
-type PyConfigStruct struct {
-	PyConfig    PyConfig `json:"PyConfig"`
-	PyPreConfig PyConfig `json:"PyPreConfig"`
+func (p PyConfig) GetMemberOffset(name string) int {
+	for _, m := range p.Members {
+		if m.Name == name {
+			return m.Offset
+		}
+	}
+	return -1
+}
+
+type PyStructs struct {
+	PyConfig         PyConfig `json:"PyConfig"`
+	PyPreConfig      PyConfig `json:"PyPreConfig"`
+	PyWideStringList PyConfig `json:"PyWideStringList"`
+	PyObject         PyConfig `json:"PyObject"`
+	PyMethodDef      PyConfig `json:"PyMethodDef"`
+	PyModuleDef_Base PyConfig `json:"PyModuleDef_Base"`
+	PyModuleDef      PyConfig `json:"PyModuleDef"`
 }
 
 type PyCtags struct {
-	Functions []PyFunction   `json:"PyFunctions"`
-	PyConfigs PyConfigStruct `json:"PyStructs"`
+	Functions []PyFunction `json:"PyFunctions"`
+	PyStructs PyStructs    `json:"PyStructs"`
 }
 
 type WcharPtr uintptr

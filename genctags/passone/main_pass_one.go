@@ -136,7 +136,7 @@ func genPlatformGoFile(platformfolder string, platformpkgfolder, env string, str
 	platformpyfile.WriteString("void initStruct() { config = (PyConfig *)malloc(sizeof(PyConfig)); }\n")
 	platformpyfile.WriteString("void deinitStruct() { free(config); }\n\n")
 
-	for _, v := range structs.PyConfigs.PyConfig.Members {
+	for _, v := range structs.PyStructs.PyConfig.Members {
 		// int _config_init() { return (int)((void *)&config->_config_init - (void *)config);}
 		platformpyfile.WriteString(fmt.Sprintf("int %s() { return (int)((void *)&config->%s - (void *)config);}\n", v.Name, v.Name))
 	}
@@ -144,14 +144,14 @@ func genPlatformGoFile(platformfolder string, platformpkgfolder, env string, str
 	platformpyfile.WriteString("import \"C\"\n")
 	platformpyfile.WriteString("func PopulateStructs(PyCtags *kindalib.PyCtags) {\n")
 	platformpyfile.WriteString("\t\tC.initStruct()\n\n")
-	platformpyfile.WriteString("\t\tfor i, v := range PyCtags.PyConfigs.PyConfig.Members {\n")
+	platformpyfile.WriteString("\t\tfor i, v := range PyCtags.PyStructs.PyConfig.Members {\n")
 	platformpyfile.WriteString("\t\t\tswitch v.Name {\n")
-	for _, v := range structs.PyConfigs.PyConfig.Members {
+	for _, v := range structs.PyStructs.PyConfig.Members {
 		platformpyfile.WriteString(fmt.Sprintf("\t\t\tcase \"%s\":\n", v.Name))
-		platformpyfile.WriteString(fmt.Sprintf("\t\t\t\tPyCtags.PyConfigs.PyConfig.Members[i].Offset = int(C.%s())\n", v.Name))
+		platformpyfile.WriteString(fmt.Sprintf("\t\t\t\tPyCtags.PyStructs.PyConfig.Members[i].Offset = int(C.%s())\n", v.Name))
 	}
 	platformpyfile.WriteString("\t\t\tdefault:\n")
-	platformpyfile.WriteString("\t\t\t\tPyCtags.PyConfigs.PyConfig.Members[i].Offset = -1\n")
+	platformpyfile.WriteString("\t\t\t\tPyCtags.PyStructs.PyConfig.Members[i].Offset = -1\n")
 	platformpyfile.WriteString("\t\t\t\tfmt.Printf(\"Unknown member: %s\\n\", v.Name)\n")
 	platformpyfile.WriteString("\t\t\t}\n")
 	platformpyfile.WriteString("\t\t}\n")
@@ -186,28 +186,28 @@ func main() {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["39"].PipInstallPackage("pycparser", "", "", false)
+	envs["39"].PipInstallPackage("pycparser", "", "", false, kinda.ShowNothing)
 
 	envs["310"], err = kinda.CreateEnvironment("myenv310", rootDirectory, "3.10", "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["310"].PipInstallPackage("pycparser", "", "", false)
+	envs["310"].PipInstallPackage("pycparser", "", "", false, kinda.ShowNothing)
 
 	envs["311"], err = kinda.CreateEnvironment("myenv311", rootDirectory, "3.11", "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["311"].PipInstallPackage("pycparser", "", "", false)
+	envs["311"].PipInstallPackage("pycparser", "", "", false, kinda.ShowNothing)
 
 	envs["312"], err = kinda.CreateEnvironment("myenv312", rootDirectory, "3.12", "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
 		return
 	}
-	envs["312"].PipInstallPackage("pycparser", "", "", false)
+	envs["312"].PipInstallPackage("pycparser", "", "", false, kinda.ShowNothing)
 
 	// recursively copy (not rename) the entire micromamba folder to the second pass folder
 	// this will allow us to run the second pass without having to recreate the environments

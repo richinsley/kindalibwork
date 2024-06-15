@@ -33,6 +33,9 @@ typedef struct {
     int exitcode;
 } PyStatus;
 
+// _Py_NoneStruct is the static None object in Python
+void * _Py_NoneStruct = NULL;
+
 void loadPythonFunctions(char * libpath, char** functionNames, void** functionPointers, int count) {
     char *error;
 	// linux needs RTLD_GLOBAL or else it will have problems resolving some symbols
@@ -50,6 +53,8 @@ void loadPythonFunctions(char * libpath, char** functionNames, void** functionPo
             functionPointers[i] = NULL;
         }
     }
+
+	_Py_NoneStruct = dlsym(handle, "_Py_NoneStruct");
 }
 
 static uint64_t Syscall0(void* addr) {
@@ -296,7 +301,7 @@ func (p *PythonLib) GetPyConfigPointer(member string) unsafe.Pointer {
 	// get the offset for the member
 	var offset int
 	gotit := false
-	for _, m := range p.CTags.PyConfigs.PyConfig.Members {
+	for _, m := range p.CTags.PyStructs.PyConfig.Members {
 		if m.Name == member {
 			gotit = true
 			offset = m.Offset
@@ -318,7 +323,7 @@ func (p *PythonLib) SetPyConfigPointer(member string, ptr uintptr) {
 	// get the offset for the member
 	var offset int
 	gotit := false
-	for _, m := range p.CTags.PyConfigs.PyConfig.Members {
+	for _, m := range p.CTags.PyStructs.PyConfig.Members {
 		if m.Name == member {
 			gotit = true
 			offset = m.Offset
@@ -339,7 +344,7 @@ func (p *PythonLib) SetPyConfigPointer(member string, ptr uintptr) {
 func (p *PythonLib) Init(program_name string) error {
 	var PyConfig uintptr
 	if p.Environment != nil {
-		PyConfig = p.Invoke("PyMem_RawCalloc", uintptr(p.CTags.PyConfigs.PyConfig.Size+512))
+		PyConfig = p.Invoke("PyMem_RawCalloc", uintptr(p.CTags.PyStructs.PyConfig.Size+512))
 		p.PyConfig = ToPtr(PyConfig)
 
 		// regular python initialization
@@ -380,4 +385,8 @@ func (p *PythonLib) Init(program_name string) error {
 	}
 
 	return nil
+}
+
+func (p *PythonLib) GetPyNone() unsafe.Pointer {
+	return C._Py_NoneStruct
 }
