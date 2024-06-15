@@ -34,7 +34,7 @@ typedef struct {
 } PyStatus;
 
 // _Py_NoneStruct is the static None object in Python
-static void * _Py_NoneStruct = NULL;
+void * our_Py_NoneStruct = NULL;
 
 void loadPythonFunctions(char * libpath, char** functionNames, void** functionPointers, int count) {
     char *error;
@@ -54,7 +54,7 @@ void loadPythonFunctions(char * libpath, char** functionNames, void** functionPo
         }
     }
 
-	_Py_NoneStruct = dlsym(handle, "_Py_NoneStruct");
+	our_Py_NoneStruct = dlsym(handle, "_Py_NoneStruct");
 }
 
 static uint64_t Syscall0(void* addr) {
@@ -388,5 +388,5 @@ func (p *PythonLib) Init(program_name string) error {
 }
 
 func (p *PythonLib) GetPyNone() unsafe.Pointer {
-	return C._Py_NoneStruct
+	return C.our_Py_NoneStruct
 }
