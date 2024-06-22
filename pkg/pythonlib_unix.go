@@ -387,6 +387,6 @@ func (p *PythonLib) Init(program_name string) error {
 	return nil
 }
 
-func (p *PythonLib) GetPyNone() unsafe.Pointer {
-	return C.our_Py_NoneStruct
+func (p *PythonLib) GetPyNone() uintptr {
+	return uintptr(unsafe.Pointer(C.our_Py_NoneStruct))
 }

@@ -45,5 +45,6 @@ genctags/passone/pycparser
 genctags/pycparser
 genctags/passtwo/pkg
 genctags/platform_ctags
+genctags/passone/sizeof/build
 
 

@@ -7,38 +7,32 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/jwijenbergh/purego"
 	kinda "github.com/richinsley/kinda/pkg"
 	pylib "github.com/richinsley/kindalib/pkg"
 )
 
-/*
-#include <stdio.h>
-#include <stdint.h>
-
-static void * pynone = NULL;
-void * button_clicked(void* p1, void* p2) {
-	printf("Button clicked! (C function called)\n");
-	return pynone;
-}
-
-void set_pynone(void* p) {
-	pynone = p;
-}
-
-void * get_cb() {
-	return button_clicked;
-}
-*/
-import "C"
-
 var quote_str string = `
+import tkinter as tk
 import example_module
-example_module.button_clicked()
-`
 
-func cb(p1 uintptr, p2 uintptr) uintptr {
+def button_click():
+    example_module.button_clicked()
+    print("Button clicked! (Python function called)")
+
+window = tk.Tk()
+window.title("Tkinter Example with C++ Callback")
+
+button = tk.Button(window, text="Click Me", command=button_click)
+button.pack()
+
+window.mainloop()
+`
+var pynone uintptr
+
+func button_cb(p1 uintptr, p2 uintptr) uintptr {
 	fmt.Println("Button clicked!")
-	return 0
+	return pynone
 }
 
 func init() {
@@ -52,7 +46,7 @@ func main() {
 	cwd, _ := os.Getwd()
 	rootDirectory := filepath.Join(cwd, "..", "micromamba")
 	fmt.Println("Creating Kinda repo at: ", rootDirectory)
-	version := "3.10"
+	version := "3.11"
 	env, err := kinda.CreateEnvironment("myenv"+version, rootDirectory, version, "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
@@ -72,18 +66,18 @@ func main() {
 	// set the PyNone pointer
 	// pynone is a global static PyObject* that is used to return None from C functions
 	// returning just NULL is not enough, you need to return Py_None
-	pynone := lib.GetPyNone()
-	C.set_pynone(pynone)
+	pynone = lib.GetPyNone()
 
 	// create the method object
 	meth := lib.NewPyMethodDefArray(1)
 	fmt.Printf("Created method object with size: %d\n", meth.PyConfig.Size)
 
-	// get the C function pointer for the callback
-	goCallback := C.get_cb()
+	// create a callback function
+	var f func(uintptr, uintptr) uintptr = button_cb
+	goCallback := purego.NewCallbackFnPtr(&f)
 
 	// set the buttonClickPtr to meth.SetMethodDef
-	meth.SetMethodDef(0, "button_clicked", uintptr(goCallback), pylib.METH_NOARGS)
+	meth.SetMethodDef(0, "button_clicked", uintptr(goCallback), pylib.METH_VARARGS)
 
 	// Create the moduledef object and create the module from that def
 	moduledef := lib.NewPyModuleDef("example_module", "Example module with Go callback", &meth)
@@ -98,8 +92,8 @@ func main() {
 
 	// Run the Python code
 	lib.Invoke("PyRun_SimpleString", pylib.StrToPtr(quote_str))
-}
 
-// funcPC returns the function pointer of the given function
-// This is implemented in assembly to avoid cgo
-// func funcPC(f interface{}) uintptr
+	purego.UnrefCallbackFnPtr(&f)
+
+	select {}
+}

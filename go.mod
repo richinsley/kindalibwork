@@ -4,6 +4,7 @@ go 1.22.1
 
 require (
 	github.com/go-git/go-git/v5 v5.11.0
+	github.com/jwijenbergh/purego v0.0.0-20240527152122-d7876464a49c
 	github.com/otiai10/copy v1.14.0
 	github.com/richinsley/kinda v0.1.0
 )

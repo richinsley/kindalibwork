@@ -14,7 +14,7 @@ type IPythonLib interface {
 	AllocBuffer(size int) uintptr
 	FreeBuffer(addr uintptr)
 	Init(string) error
-	GetPyNone() unsafe.Pointer
+	GetPyNone() uintptr
 
 	NewPyMethodDefArray(count int) PyMethodDefArray
 	NewPyModuleDef(name string, doc string, methods *PyMethodDefArray) PyModuleDef
