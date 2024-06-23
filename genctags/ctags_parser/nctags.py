@@ -162,7 +162,7 @@ class TypeDaggerNode(DaggerNode):
                         'offset': current_offset
                     }
 
-                    # if member is a pointer, store the pointer type
+                    # if member is a pointer, store the pointer type                        
                     if member['type']['name'] == 'pointer':
                         if 'pointer' in member['type']:
                             newmember['pointer'] = member['type']['pointer']
@@ -512,6 +512,45 @@ def preprocess_and_parse(fake_header_file_path: str, header_file_path: str) -> c
 
     return ast
 
+# class PyAPIDataFinder(c_ast.NodeVisitor):
+#     def __init__(self):
+#         self.api_data_info = []
+#         self.api_data_types = ['PyTypeObject', 'PyObject', 'PyMethodDef', 'PyModuleDef', 'PyMemberDef', 'PyGetSetDef', 'PyStructSequence_Desc']
+#         self.current_depth = 0
+
+#     def visit_FuncDef(self, node):
+#         self.current_depth += 1
+#         self.generic_visit(node)
+#         self.current_depth -= 1
+
+#     def visit_Compound(self, node):
+#         self.current_depth += 1
+#         self.generic_visit(node)
+#         self.current_depth -= 1
+
+#     def visit_Decl(self, node):
+#         # Check if this is a top-level (global) declaration
+#         if self.current_depth == 0:
+#             type_name = self.get_type(node.type)
+#             base_type = type_name.rstrip('* \t')  # Remove trailing '*', spaces, and tabs
+#             if base_type in self.api_data_types:
+#                 data_info = {
+#                     'name': node.name,
+#                     'type': type_name
+#                 }
+#                 self.api_data_info.append(data_info)
+#                 print(f"Found potential PyAPI_DATA: {node.name} of type {type_name}")
+
+#     def get_type(self, node):
+#         if isinstance(node, c_ast.TypeDecl):
+#             return self.get_type(node.type)
+#         elif isinstance(node, c_ast.IdentifierType):
+#             return ' '.join(node.names)
+#         elif isinstance(node, c_ast.PtrDecl):
+#             return self.get_type(node.type) + '*'
+#         else:
+#             return 'unknown'
+        
 class FunctionFinder(c_ast.NodeVisitor):
     def __init__(self, prototypes):
         self.prototypes = prototypes
@@ -650,8 +689,7 @@ class TypeFinder(c_ast.NodeVisitor):
                                 'members': member['type']['value']['members']
                             }
                         }
-                        if name == 'pointer':
-                            print("pointer")
+
                         # convert to an IdentifierType
                         return {
                             'name': name,
@@ -698,14 +736,19 @@ class TypeFinder(c_ast.NodeVisitor):
                 'type': "IdentifierType",
                 'value': "pointer"
             }
-            # store the pointer type
-            if 'type' in t:
+            if 'pointer' in t:
+                # we already have a pointer type, so just return it
+                retv['pointer'] = t['pointer']
+            elif 'type' in t:
+                # store the pointer type if not already stored
                 if t['type'] == 'FuncDecl':
                     # store the function pointer type
                     retv['pointer'] = 'function'
                 elif isinstance(t['value'], dict):
                     retv['pointer'] = t['value']['name']
-
+                else:
+                    retv['pointer'] = t['name']
+            
             return retv
         elif isinstance(node, c_ast.ArrayDecl):
             dim = 0
@@ -914,12 +957,9 @@ def main():
     header_file_path = sys.argv[1]      # Path to the directory containing Python headers
     ctags_bin = sys.argv[2]             # Path to the ctags binary
     fake_header_path = sys.argv[3]      # Path to the fake headers for pycparser
-
     global platform
-    if len(sys.argv) > 4:
-        platform = sys.argv[4]          # Platform (e.g., "windows")
-    else:
-        platform = "linux"
+    platform = sys.argv[4]              # Platform (e.g., "windows", "darwin", "linux)
+    output_path = sys.argv[5]           # Path to the output file
 
     ctags_output = execute_ctags(ctags_bin, header_file_path)
     header_info = parse_ctags_output(ctags_output)
@@ -932,6 +972,10 @@ def main():
     # Create an instance of the visitor with our found prototypes
     finder = FunctionFinder(found_prototypes)
     finder.visit(ast)
+
+    # # Create an instance of PyAPIDataFinder
+    # api_data_finder = PyAPIDataFinder()
+    # api_data_finder.visit(ast)
 
     # After parsing the AST with preprocess_and_parse
     type_finder = TypeFinder()
@@ -1109,18 +1153,37 @@ def main():
                 if node.name not in PyStructs:
                     if node.members != None and len(node.members) > 0:
                         members = []
-                        for key, member in node.members.items():
+                        items = []
+                        if hasattr(node.members, 'items'):
+                            ditems = node.members.items()
+                            for key, member in ditems:
+                                items.append(member)
+                        else:
+                            for member in node.members:
+                                items.append(member)
+
+                        for member in items:
                             newmember = {
-                                'name': key,
-                                'type': member['type']['name'],
+                                'name': member['name'],
                                 'offset': member['offset'],
                                 'size': member['size'],
                             }
+
+                            if 'pointer' in member:
+                                newmember['type'] = 'pointer'
+                                newmember['pointer_type'] = member['pointer']
+                            elif 'pointer' in member['type']:
+                                newmember['type'] = 'pointer'
+                                newmember['pointer_type'] = member['type']['pointer']
+                            elif 'pointer' in member['type']['type']:
+                                newmember['type'] = 'pointer'
+                                newmember['pointer_type'] = member['type']['type']['pointer']
+                            else:
+                                newmember['type'] = member['type']['name']
+
                             if 'bitsize' in member:
                                 newmember['bitsize'] = member['bitsize']
-                            if 'pointer' in member:
-                                newmember['pointer_type'] = member['pointer']
-
+                            
                             members.append(newmember)
                         sinfo = {
                             'name': node.name,
@@ -1138,7 +1201,6 @@ def main():
     json_output = json.dumps(combined_info, indent=4)
     
     # write the JSON to /Users/richardinsley/Projects/comfycli/kindalib/pkg/platform_ctags/darwin/ctags-311.json
-    output_path = '/Users/richardinsley/Projects/comfycli/kindalib/pkg/platform_ctags/darwin/ctags-311.json'
     with open(output_path, 'w') as f:
         f.write(json_output)
 

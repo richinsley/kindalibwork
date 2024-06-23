@@ -16124,387 +16124,427 @@
         }
     ],
     "PyStructs": {
+        "PyWideStringList": {
+            "name": "PyWideStringList",
+            "size": 16,
+            "members": [
+                {
+                    "name": "length",
+                    "offset": 0,
+                    "size": 8,
+                    "type": "length"
+                },
+                {
+                    "name": "items",
+                    "offset": 8,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
+                }
+            ]
+        },
         "PyConfig": {
             "name": "PyConfig",
             "size": 544,
             "members": [
                 {
                     "name": "_config_init",
-                    "type": "int",
                     "offset": 0,
-                    "size": 4
+                    "size": 8,
+                    "type": "_config_init"
                 },
                 {
                     "name": "isolated",
-                    "type": "int",
                     "offset": 8,
-                    "size": 4
+                    "size": 8,
+                    "type": "isolated"
                 },
                 {
                     "name": "use_environment",
-                    "type": "int",
                     "offset": 16,
-                    "size": 4
+                    "size": 8,
+                    "type": "use_environment"
                 },
                 {
                     "name": "dev_mode",
-                    "type": "int",
                     "offset": 24,
-                    "size": 4
+                    "size": 8,
+                    "type": "dev_mode"
                 },
                 {
                     "name": "install_signal_handlers",
-                    "type": "int",
                     "offset": 32,
-                    "size": 4
+                    "size": 8,
+                    "type": "install_signal_handlers"
                 },
                 {
                     "name": "use_hash_seed",
-                    "type": "int",
                     "offset": 40,
-                    "size": 4
+                    "size": 8,
+                    "type": "use_hash_seed"
                 },
                 {
                     "name": "hash_seed",
-                    "type": "unsigned long",
                     "offset": 48,
-                    "size": 8
+                    "size": 8,
+                    "type": "hash_seed"
                 },
                 {
                     "name": "faulthandler",
-                    "type": "int",
                     "offset": 56,
-                    "size": 4
+                    "size": 8,
+                    "type": "faulthandler"
                 },
                 {
                     "name": "tracemalloc",
-                    "type": "int",
                     "offset": 64,
-                    "size": 4
+                    "size": 8,
+                    "type": "tracemalloc"
                 },
                 {
                     "name": "import_time",
-                    "type": "int",
                     "offset": 72,
-                    "size": 4
+                    "size": 8,
+                    "type": "import_time"
                 },
                 {
                     "name": "code_debug_ranges",
-                    "type": "int",
                     "offset": 80,
-                    "size": 4
+                    "size": 8,
+                    "type": "code_debug_ranges"
                 },
                 {
                     "name": "show_ref_count",
-                    "type": "int",
                     "offset": 88,
-                    "size": 4
+                    "size": 8,
+                    "type": "show_ref_count"
                 },
                 {
                     "name": "dump_refs",
-                    "type": "int",
                     "offset": 96,
-                    "size": 4
+                    "size": 8,
+                    "type": "dump_refs"
                 },
                 {
                     "name": "dump_refs_file",
-                    "type": "wchar_t*",
                     "offset": 104,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "malloc_stats",
-                    "type": "int",
                     "offset": 112,
-                    "size": 4
+                    "size": 8,
+                    "type": "malloc_stats"
                 },
                 {
                     "name": "filesystem_encoding",
-                    "type": "wchar_t*",
                     "offset": 120,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "filesystem_errors",
-                    "type": "wchar_t*",
                     "offset": 128,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "pycache_prefix",
-                    "type": "wchar_t*",
                     "offset": 136,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "parse_argv",
-                    "type": "int",
                     "offset": 144,
-                    "size": 4
+                    "size": 8,
+                    "type": "parse_argv"
                 },
                 {
                     "name": "orig_argv",
-                    "type": "PyWideStringList",
                     "offset": 152,
-                    "size": 16
+                    "size": 16,
+                    "type": "orig_argv"
                 },
                 {
                     "name": "argv",
-                    "type": "PyWideStringList",
                     "offset": 168,
-                    "size": 16
+                    "size": 16,
+                    "type": "argv"
                 },
                 {
                     "name": "xoptions",
-                    "type": "PyWideStringList",
                     "offset": 184,
-                    "size": 16
+                    "size": 16,
+                    "type": "xoptions"
                 },
                 {
                     "name": "warnoptions",
-                    "type": "PyWideStringList",
                     "offset": 200,
-                    "size": 16
+                    "size": 16,
+                    "type": "warnoptions"
                 },
                 {
                     "name": "site_import",
-                    "type": "int",
                     "offset": 216,
-                    "size": 4
+                    "size": 8,
+                    "type": "site_import"
                 },
                 {
                     "name": "bytes_warning",
-                    "type": "int",
                     "offset": 224,
-                    "size": 4
+                    "size": 8,
+                    "type": "bytes_warning"
                 },
                 {
                     "name": "warn_default_encoding",
-                    "type": "int",
                     "offset": 232,
-                    "size": 4
+                    "size": 8,
+                    "type": "warn_default_encoding"
                 },
                 {
                     "name": "inspect",
-                    "type": "int",
                     "offset": 240,
-                    "size": 4
+                    "size": 8,
+                    "type": "inspect"
                 },
                 {
                     "name": "interactive",
-                    "type": "int",
                     "offset": 248,
-                    "size": 4
+                    "size": 8,
+                    "type": "interactive"
                 },
                 {
                     "name": "optimization_level",
-                    "type": "int",
                     "offset": 256,
-                    "size": 4
+                    "size": 8,
+                    "type": "optimization_level"
                 },
                 {
                     "name": "parser_debug",
-                    "type": "int",
                     "offset": 264,
-                    "size": 4
+                    "size": 8,
+                    "type": "parser_debug"
                 },
                 {
                     "name": "write_bytecode",
-                    "type": "int",
                     "offset": 272,
-                    "size": 4
+                    "size": 8,
+                    "type": "write_bytecode"
                 },
                 {
                     "name": "verbose",
-                    "type": "int",
                     "offset": 280,
-                    "size": 4
+                    "size": 8,
+                    "type": "verbose"
                 },
                 {
                     "name": "quiet",
-                    "type": "int",
                     "offset": 288,
-                    "size": 4
+                    "size": 8,
+                    "type": "quiet"
                 },
                 {
                     "name": "user_site_directory",
-                    "type": "int",
                     "offset": 296,
-                    "size": 4
+                    "size": 8,
+                    "type": "user_site_directory"
                 },
                 {
                     "name": "configure_c_stdio",
-                    "type": "int",
                     "offset": 304,
-                    "size": 4
+                    "size": 8,
+                    "type": "configure_c_stdio"
                 },
                 {
                     "name": "buffered_stdio",
-                    "type": "int",
                     "offset": 312,
-                    "size": 4
+                    "size": 8,
+                    "type": "buffered_stdio"
                 },
                 {
                     "name": "stdio_encoding",
-                    "type": "wchar_t*",
                     "offset": 320,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "stdio_errors",
-                    "type": "wchar_t*",
                     "offset": 328,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "check_hash_pycs_mode",
-                    "type": "wchar_t*",
                     "offset": 336,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "use_frozen_modules",
-                    "type": "int",
                     "offset": 344,
-                    "size": 4
+                    "size": 8,
+                    "type": "use_frozen_modules"
                 },
                 {
                     "name": "safe_path",
-                    "type": "int",
                     "offset": 352,
-                    "size": 4
+                    "size": 8,
+                    "type": "safe_path"
                 },
                 {
                     "name": "pathconfig_warnings",
-                    "type": "int",
                     "offset": 360,
-                    "size": 4
+                    "size": 8,
+                    "type": "pathconfig_warnings"
                 },
                 {
                     "name": "program_name",
-                    "type": "wchar_t*",
                     "offset": 368,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "pythonpath_env",
-                    "type": "wchar_t*",
                     "offset": 376,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "home",
-                    "type": "wchar_t*",
                     "offset": 384,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "platlibdir",
-                    "type": "wchar_t*",
                     "offset": 392,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "module_search_paths_set",
-                    "type": "int",
                     "offset": 400,
-                    "size": 4
+                    "size": 8,
+                    "type": "module_search_paths_set"
                 },
                 {
                     "name": "module_search_paths",
-                    "type": "PyWideStringList",
                     "offset": 408,
-                    "size": 16
+                    "size": 16,
+                    "type": "module_search_paths"
                 },
                 {
                     "name": "stdlib_dir",
-                    "type": "wchar_t*",
                     "offset": 424,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "executable",
-                    "type": "wchar_t*",
                     "offset": 432,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "base_executable",
-                    "type": "wchar_t*",
                     "offset": 440,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "prefix",
-                    "type": "wchar_t*",
                     "offset": 448,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "base_prefix",
-                    "type": "wchar_t*",
                     "offset": 456,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "exec_prefix",
-                    "type": "wchar_t*",
                     "offset": 464,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "base_exec_prefix",
-                    "type": "wchar_t*",
                     "offset": 472,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "skip_source_first_line",
-                    "type": "int",
                     "offset": 480,
-                    "size": 4
+                    "size": 8,
+                    "type": "skip_source_first_line"
                 },
                 {
                     "name": "run_command",
-                    "type": "wchar_t*",
                     "offset": 488,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "run_module",
-                    "type": "wchar_t*",
                     "offset": 496,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "run_filename",
-                    "type": "wchar_t*",
                     "offset": 504,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 },
                 {
                     "name": "_install_importlib",
-                    "type": "int",
                     "offset": 512,
-                    "size": 4
+                    "size": 8,
+                    "type": "_install_importlib"
                 },
                 {
                     "name": "_init_main",
-                    "type": "int",
                     "offset": 520,
-                    "size": 4
+                    "size": 8,
+                    "type": "_init_main"
                 },
                 {
                     "name": "_isolated_interpreter",
-                    "type": "int",
                     "offset": 528,
-                    "size": 4
+                    "size": 8,
+                    "type": "_isolated_interpreter"
                 },
                 {
                     "name": "_is_python_build",
-                    "type": "int",
                     "offset": 536,
-                    "size": 4
+                    "size": 8,
+                    "type": "_is_python_build"
                 }
             ]
         },
@@ -16514,99 +16554,63 @@
             "members": [
                 {
                     "name": "_config_init",
-                    "type": "int",
                     "offset": 0,
-                    "size": 4
+                    "size": 8,
+                    "type": "_config_init"
                 },
                 {
                     "name": "parse_argv",
-                    "type": "int",
                     "offset": 8,
-                    "size": 4
+                    "size": 8,
+                    "type": "parse_argv"
                 },
                 {
                     "name": "isolated",
-                    "type": "int",
                     "offset": 16,
-                    "size": 4
+                    "size": 8,
+                    "type": "isolated"
                 },
                 {
                     "name": "use_environment",
-                    "type": "int",
                     "offset": 24,
-                    "size": 4
+                    "size": 8,
+                    "type": "use_environment"
                 },
                 {
                     "name": "configure_locale",
-                    "type": "int",
                     "offset": 32,
-                    "size": 4
+                    "size": 8,
+                    "type": "configure_locale"
                 },
                 {
                     "name": "coerce_c_locale",
-                    "type": "int",
                     "offset": 40,
-                    "size": 4
+                    "size": 8,
+                    "type": "coerce_c_locale"
                 },
                 {
                     "name": "coerce_c_locale_warn",
-                    "type": "int",
                     "offset": 48,
-                    "size": 4
+                    "size": 8,
+                    "type": "coerce_c_locale_warn"
                 },
                 {
                     "name": "utf8_mode",
-                    "type": "int",
                     "offset": 56,
-                    "size": 4
+                    "size": 8,
+                    "type": "utf8_mode"
                 },
                 {
                     "name": "dev_mode",
-                    "type": "int",
                     "offset": 64,
-                    "size": 4
+                    "size": 8,
+                    "type": "dev_mode"
                 },
                 {
                     "name": "allocator",
-                    "type": "int",
                     "offset": 72,
-                    "size": 4
-                }
-            ]
-        },
-        "PyWideStringList": {
-            "name": "PyWideStringList",
-            "size": 16,
-            "members": [
-                {
-                    "name": "length",
-                    "type": "Py_ssize_t",
-                    "offset": 0,
-                    "size": 8
-                },
-                {
-                    "name": "items",
-                    "type": "wchar_t**",
-                    "offset": 8,
-                    "size": 8
-                }
-            ]
-        },
-        "PyObject": {
-            "name": "PyObject",
-            "size": 16,
-            "members": [
-                {
-                    "name": "ob_refcnt",
-                    "type": "Py_ssize_t",
-                    "offset": 0,
-                    "size": 8
-                },
-                {
-                    "name": "ob_type",
-                    "type": "PyTypeObject*",
-                    "offset": 8,
-                    "size": 8
+                    "size": 8,
+                    "type": "allocator"
                 }
             ]
         },
@@ -16616,117 +16620,144 @@
             "members": [
                 {
                     "name": "ml_name",
-                    "type": "char*",
                     "offset": 0,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
                 },
                 {
                     "name": "ml_meth",
-                    "type": "PyCFunction",
                     "offset": 8,
-                    "size": 8
+                    "size": 8,
+                    "type": "ml_meth"
                 },
                 {
                     "name": "ml_flags",
-                    "type": "int",
                     "offset": 16,
-                    "size": 4
+                    "size": 8,
+                    "type": "ml_flags"
                 },
                 {
                     "name": "ml_doc",
-                    "type": "char*",
                     "offset": 24,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                }
+            ]
+        },
+        "PyObject": {
+            "name": "PyObject",
+            "size": 16,
+            "members": [
+                {
+                    "name": "ob_refcnt",
+                    "offset": 0,
+                    "size": 8,
+                    "type": "ob_refcnt"
+                },
+                {
+                    "name": "ob_type",
+                    "offset": 8,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyTypeObject"
                 }
             ]
         },
         "PyModuleDef_Base": {
             "name": "PyModuleDef_Base",
-            "size": 24,
+            "size": 40,
             "members": [
                 {
                     "name": "ob_base",
-                    "type": "PyObject",
                     "offset": 0,
-                    "size": 16
+                    "size": 16,
+                    "type": "ob_base"
                 },
                 {
                     "name": "m_init",
-                    "type": "unknown*",
                     "offset": 16,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "function"
                 },
                 {
                     "name": "m_index",
-                    "type": "Py_ssize_t",
                     "offset": 24,
-                    "size": 8
+                    "size": 8,
+                    "type": "m_index"
                 },
                 {
                     "name": "m_copy",
-                    "type": "PyObject*",
                     "offset": 32,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyObject"
                 }
             ]
         },
         "PyModuleDef": {
             "name": "PyModuleDef",
-            "size": 64,
+            "size": 104,
             "members": [
                 {
                     "name": "m_base",
-                    "type": "PyModuleDef_Base",
                     "offset": 0,
-                    "size": 24
+                    "size": 40,
+                    "type": "m_base"
                 },
                 {
                     "name": "m_name",
-                    "type": "char*",
-                    "offset": 24,
-                    "size": 8
+                    "offset": 40,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
                 },
                 {
                     "name": "m_doc",
-                    "type": "char*",
-                    "offset": 32,
-                    "size": 8
+                    "offset": 48,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
                 },
                 {
                     "name": "m_size",
-                    "type": "Py_ssize_t",
-                    "offset": 40,
-                    "size": 8
+                    "offset": 56,
+                    "size": 8,
+                    "type": "m_size"
                 },
                 {
                     "name": "m_methods",
-                    "type": "PyMethodDef*",
-                    "offset": 48,
-                    "size": 8
+                    "offset": 64,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyMethodDef"
                 },
                 {
                     "name": "m_slots",
-                    "type": "PyModuleDef_Slot*",
-                    "offset": 56,
-                    "size": 8
+                    "offset": 72,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyModuleDef_Slot"
                 },
                 {
                     "name": "m_traverse",
-                    "type": "traverseproc",
-                    "offset": 64,
-                    "size": 8
+                    "offset": 80,
+                    "size": 8,
+                    "type": "m_traverse"
                 },
                 {
                     "name": "m_clear",
-                    "type": "inquiry",
-                    "offset": 72,
-                    "size": 8
+                    "offset": 88,
+                    "size": 8,
+                    "type": "m_clear"
                 },
                 {
                     "name": "m_free",
-                    "type": "freefunc",
-                    "offset": 80,
-                    "size": 8
+                    "offset": 96,
+                    "size": 8,
+                    "type": "m_free"
                 }
             ]
         }

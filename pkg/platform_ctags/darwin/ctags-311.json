@@ -4111,6 +4111,2316 @@
             ]
         },
         {
+            "name": "PyCode_New",
+            "return_type": "PyCodeObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_NewWithPosOnlyArgs",
+            "return_type": "PyCodeObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_Addr2Line",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyCodeObject*"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_Addr2Location",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyCodeObject*"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                },
+                {
+                    "name": "",
+                    "type": "int*"
+                },
+                {
+                    "name": "",
+                    "type": "int*"
+                },
+                {
+                    "name": "",
+                    "type": "int*"
+                },
+                {
+                    "name": "",
+                    "type": "int*"
+                }
+            ]
+        },
+        {
+            "name": "_PyCode_CheckLineNumber",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "lasti",
+                    "type": "int"
+                },
+                {
+                    "name": "bounds",
+                    "type": "PyCodeAddressRange*"
+                }
+            ]
+        },
+        {
+            "name": "_PyCode_ConstantKey",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "obj",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_Optimize",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "code",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "consts",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "names",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "lnotab",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "_PyCode_GetExtra",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "code",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "index",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "extra",
+                    "type": "void**"
+                }
+            ]
+        },
+        {
+            "name": "_PyCode_SetExtra",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "code",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "index",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "extra",
+                    "type": "void*"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_GetCode",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "code",
+                    "type": "PyCodeObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_GetVarnames",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "code",
+                    "type": "PyCodeObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_GetCellvars",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "code",
+                    "type": "PyCodeObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyCode_GetFreevars",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "code",
+                    "type": "PyCodeObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyStatus_Ok",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyStatus_Error",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "err_msg",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyStatus_NoMemory",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyStatus_Exit",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "exitcode",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyStatus_IsError",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "err",
+                    "type": "PyStatus"
+                }
+            ]
+        },
+        {
+            "name": "PyStatus_IsExit",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "err",
+                    "type": "PyStatus"
+                }
+            ]
+        },
+        {
+            "name": "PyStatus_Exception",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "err",
+                    "type": "PyStatus"
+                }
+            ]
+        },
+        {
+            "name": "PyWideStringList_Append",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "list",
+                    "type": "PyWideStringList*"
+                },
+                {
+                    "name": "item",
+                    "type": "wchar_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyWideStringList_Insert",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "list",
+                    "type": "PyWideStringList*"
+                },
+                {
+                    "name": "index",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "item",
+                    "type": "wchar_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyPreConfig_InitPythonConfig",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyPreConfig*"
+                }
+            ]
+        },
+        {
+            "name": "PyPreConfig_InitIsolatedConfig",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyPreConfig*"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_InitPythonConfig",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_InitIsolatedConfig",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_Clear",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyConfig*"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_SetString",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                },
+                {
+                    "name": "config_str",
+                    "type": "wchar_t**"
+                },
+                {
+                    "name": "str",
+                    "type": "wchar_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_SetBytesString",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                },
+                {
+                    "name": "config_str",
+                    "type": "wchar_t**"
+                },
+                {
+                    "name": "str",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_Read",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_SetBytesArgv",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                },
+                {
+                    "name": "argc",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "argv",
+                    "type": "char**"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_SetArgv",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                },
+                {
+                    "name": "argc",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "argv",
+                    "type": "wchar_t**"
+                }
+            ]
+        },
+        {
+            "name": "PyConfig_SetWideStringList",
+            "return_type": "PyStatus",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "PyConfig*"
+                },
+                {
+                    "name": "list",
+                    "type": "PyWideStringList*"
+                },
+                {
+                    "name": "length",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "items",
+                    "type": "wchar_t**"
+                }
+            ]
+        },
+        {
+            "name": "Py_GetArgcArgv",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "argc",
+                    "type": "int*"
+                },
+                {
+                    "name": "argv",
+                    "type": "wchar_t***"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_New",
+            "return_type": "PyInterpreterState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_Clear",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_Delete",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_Get",
+            "return_type": "PyInterpreterState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_GetDict",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_GetID",
+            "return_type": "int64_t",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "PyState_AddModule",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyModuleDef*"
+                }
+            ]
+        },
+        {
+            "name": "PyState_RemoveModule",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyModuleDef*"
+                }
+            ]
+        },
+        {
+            "name": "PyState_FindModule",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyModuleDef*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_New",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_Clear",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_Delete",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_Get",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_Swap",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_GetDict",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_SetAsyncExc",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "unsigned long"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_GetInterpreter",
+            "return_type": "PyInterpreterState*",
+            "parameters": [
+                {
+                    "name": "tstate",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_GetFrame",
+            "return_type": "PyFrameObject*",
+            "parameters": [
+                {
+                    "name": "tstate",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_GetID",
+            "return_type": "uint64_t",
+            "parameters": [
+                {
+                    "name": "tstate",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyGILState_Ensure",
+            "return_type": "PyGILState_STATE",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyGILState_Release",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyGILState_STATE"
+                }
+            ]
+        },
+        {
+            "name": "PyGILState_GetThisThreadState",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_RequiresIDRef",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_RequireIDRef",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                },
+                {
+                    "name": "",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_GetMainModule",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "_PyThreadState_Prealloc",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "_PyThreadState_UncheckedGet",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyThreadState_GetDict",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "tstate",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_EnterTracing",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "tstate",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_LeaveTracing",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "tstate",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyGILState_Check",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyGILState_GetInterpreterStateUnsafe",
+            "return_type": "PyInterpreterState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyThread_CurrentFrames",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyThread_CurrentExceptions",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_Main",
+            "return_type": "PyInterpreterState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_Head",
+            "return_type": "PyInterpreterState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_Next",
+            "return_type": "PyInterpreterState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "PyInterpreterState_ThreadHead",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_Next",
+            "return_type": "PyThreadState*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "PyThreadState_DeleteCurrent",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_GetEvalFrameFunc",
+            "return_type": "_PyFrameEvalFunction",
+            "parameters": [
+                {
+                    "name": "interp",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_SetEvalFrameFunc",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "interp",
+                    "type": "PyInterpreterState*"
+                },
+                {
+                    "name": "eval_frame",
+                    "type": "_PyFrameEvalFunction"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_GetConfig",
+            "return_type": "PyConfig*",
+            "parameters": [
+                {
+                    "name": "interp",
+                    "type": "PyInterpreterState*"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_GetConfigCopy",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "unknown*"
+                }
+            ]
+        },
+        {
+            "name": "_PyInterpreterState_SetConfig",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "config",
+                    "type": "unknown*"
+                }
+            ]
+        },
+        {
+            "name": "_Py_GetConfig",
+            "return_type": "PyConfig*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyObject_GetCrossInterpreterData",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "_PyCrossInterpreterData*"
+                }
+            ]
+        },
+        {
+            "name": "_PyCrossInterpreterData_NewObject",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "_PyCrossInterpreterData*"
+                }
+            ]
+        },
+        {
+            "name": "_PyCrossInterpreterData_Release",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "_PyCrossInterpreterData*"
+                }
+            ]
+        },
+        {
+            "name": "_PyObject_CheckCrossInterpreterData",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "_PyCrossInterpreterData_RegisterClass",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyTypeObject*"
+                },
+                {
+                    "name": "",
+                    "type": "crossinterpdatafunc"
+                }
+            ]
+        },
+        {
+            "name": "_PyCrossInterpreterData_Lookup",
+            "return_type": "crossinterpdatafunc",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetNone",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetObject",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetString",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "exception",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "string",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_Occurred",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_Clear",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_Fetch",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_Restore",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_GetHandledException",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetHandledException",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_GetExcInfo",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetExcInfo",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_GivenExceptionMatches",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_ExceptionMatches",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_NormalizeException",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                }
+            ]
+        },
+        {
+            "name": "PyException_SetTraceback",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyException_GetTraceback",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyException_GetCause",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyException_SetCause",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyException_GetContext",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyException_SetContext",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyExceptionClass_Name",
+            "return_type": "char*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_BadArgument",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_NoMemory",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetFromErrno",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetFromErrnoWithFilenameObject",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetFromErrnoWithFilenameObjects",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetFromErrnoWithFilename",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "exc",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "filename",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_Format",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "exception",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "format",
+                    "type": "char*"
+                },
+                {
+                    "name": "",
+                    "type": "..."
+                }
+            ]
+        },
+        {
+            "name": "PyErr_FormatV",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "exception",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "format",
+                    "type": "char*"
+                },
+                {
+                    "name": "vargs",
+                    "type": "va_list"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetImportErrorSubclass",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetImportError",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_BadInternalCall",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_BadInternalCall",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "char*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_NewException",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "name",
+                    "type": "char*"
+                },
+                {
+                    "name": "base",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "dict",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_NewExceptionWithDoc",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "name",
+                    "type": "char*"
+                },
+                {
+                    "name": "doc",
+                    "type": "char*"
+                },
+                {
+                    "name": "base",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "dict",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_WriteUnraisable",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_CheckSignals",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetInterrupt",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SetInterruptEx",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "signum",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SyntaxLocation",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "char*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SyntaxLocationEx",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "char*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                },
+                {
+                    "name": "col_offset",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_ProgramText",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "char*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_Create",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "encoding",
+                    "type": "char*"
+                },
+                {
+                    "name": "object",
+                    "type": "char*"
+                },
+                {
+                    "name": "length",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "start",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "end",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "reason",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_GetEncoding",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_GetEncoding",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_GetObject",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_GetObject",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeTranslateError_GetObject",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_GetStart",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_GetStart",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeTranslateError_GetStart",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_SetStart",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_SetStart",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeTranslateError_SetStart",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_GetEnd",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_GetEnd",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeTranslateError_GetEnd",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_SetEnd",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_SetEnd",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeTranslateError_SetEnd",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "Py_ssize_t"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_GetReason",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_GetReason",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeTranslateError_GetReason",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeEncodeError_SetReason",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "exc",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "reason",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeDecodeError_SetReason",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "exc",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "reason",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyUnicodeTranslateError_SetReason",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "exc",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "reason",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "PyOS_snprintf",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "str",
+                    "type": "char*"
+                },
+                {
+                    "name": "size",
+                    "type": "size_t"
+                },
+                {
+                    "name": "format",
+                    "type": "char*"
+                },
+                {
+                    "name": "",
+                    "type": "..."
+                }
+            ]
+        },
+        {
+            "name": "PyOS_vsnprintf",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "str",
+                    "type": "char*"
+                },
+                {
+                    "name": "size",
+                    "type": "size_t"
+                },
+                {
+                    "name": "format",
+                    "type": "char*"
+                },
+                {
+                    "name": "va",
+                    "type": "va_list"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_SetKeyError",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_GetTopmostException",
+            "return_type": "_PyErr_StackItem*",
+            "parameters": [
+                {
+                    "name": "tstate",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_GetHandledException",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyThreadState*"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_SetHandledException",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyThreadState*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_GetExcInfo",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyThreadState*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject**"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_ChainExceptions",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_FormatFromCause",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "exception",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "format",
+                    "type": "char*"
+                },
+                {
+                    "name": "",
+                    "type": "..."
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_TrySetFromCause",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "prefix_format",
+                    "type": "char*"
+                },
+                {
+                    "name": "",
+                    "type": "..."
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_CheckSignals",
+            "return_type": "int",
+            "parameters": [
+                {
+                    "name": "",
+                    "type": "void"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_SyntaxLocationObject",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                },
+                {
+                    "name": "col_offset",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_RangedSyntaxLocationObject",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                },
+                {
+                    "name": "col_offset",
+                    "type": "int"
+                },
+                {
+                    "name": "end_lineno",
+                    "type": "int"
+                },
+                {
+                    "name": "end_col_offset",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "PyErr_ProgramTextObject",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_ProgramDecodedTextObject",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "lineno",
+                    "type": "int"
+                },
+                {
+                    "name": "encoding",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "_PyUnicodeTranslateError_Create",
+            "return_type": "PyObject*",
+            "parameters": [
+                {
+                    "name": "object",
+                    "type": "PyObject*"
+                },
+                {
+                    "name": "start",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "end",
+                    "type": "Py_ssize_t"
+                },
+                {
+                    "name": "reason",
+                    "type": "char*"
+                }
+            ]
+        },
+        {
+            "name": "_PyErr_WriteUnraisableMsg",
+            "return_type": "void",
+            "parameters": [
+                {
+                    "name": "err_msg",
+                    "type": "char*"
+                },
+                {
+                    "name": "obj",
+                    "type": "PyObject*"
+                }
+            ]
+        },
+        {
             "name": "PyLong_FromLong",
             "return_type": "PyObject*",
             "parameters": [
@@ -6939,324 +9249,6 @@
             ]
         },
         {
-            "name": "PyCode_New",
-            "return_type": "PyCodeObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_NewWithPosOnlyArgs",
-            "return_type": "PyCodeObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_Addr2Line",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyCodeObject*"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_Addr2Location",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyCodeObject*"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                },
-                {
-                    "name": "",
-                    "type": "int*"
-                },
-                {
-                    "name": "",
-                    "type": "int*"
-                },
-                {
-                    "name": "",
-                    "type": "int*"
-                },
-                {
-                    "name": "",
-                    "type": "int*"
-                }
-            ]
-        },
-        {
-            "name": "_PyCode_CheckLineNumber",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "lasti",
-                    "type": "int"
-                },
-                {
-                    "name": "bounds",
-                    "type": "PyCodeAddressRange*"
-                }
-            ]
-        },
-        {
-            "name": "_PyCode_ConstantKey",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "obj",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_Optimize",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "code",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "consts",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "names",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "lnotab",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "_PyCode_GetExtra",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "code",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "index",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "extra",
-                    "type": "void**"
-                }
-            ]
-        },
-        {
-            "name": "_PyCode_SetExtra",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "code",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "index",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "extra",
-                    "type": "void*"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_GetCode",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "code",
-                    "type": "PyCodeObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_GetVarnames",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "code",
-                    "type": "PyCodeObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_GetCellvars",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "code",
-                    "type": "PyCodeObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyCode_GetFreevars",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "code",
-                    "type": "PyCodeObject*"
-                }
-            ]
-        },
-        {
             "name": "PyFrame_GetLineNumber",
             "return_type": "int",
             "parameters": [
@@ -7618,820 +9610,6 @@
                     "name": "",
                     "type": "PyObject*"
                 },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyStatus_Ok",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyStatus_Error",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "err_msg",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyStatus_NoMemory",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyStatus_Exit",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "exitcode",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyStatus_IsError",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "err",
-                    "type": "PyStatus"
-                }
-            ]
-        },
-        {
-            "name": "PyStatus_IsExit",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "err",
-                    "type": "PyStatus"
-                }
-            ]
-        },
-        {
-            "name": "PyStatus_Exception",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "err",
-                    "type": "PyStatus"
-                }
-            ]
-        },
-        {
-            "name": "PyWideStringList_Append",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "list",
-                    "type": "PyWideStringList*"
-                },
-                {
-                    "name": "item",
-                    "type": "wchar_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyWideStringList_Insert",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "list",
-                    "type": "PyWideStringList*"
-                },
-                {
-                    "name": "index",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "item",
-                    "type": "wchar_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyPreConfig_InitPythonConfig",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyPreConfig*"
-                }
-            ]
-        },
-        {
-            "name": "PyPreConfig_InitIsolatedConfig",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyPreConfig*"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_InitPythonConfig",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_InitIsolatedConfig",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_Clear",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyConfig*"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_SetString",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                },
-                {
-                    "name": "config_str",
-                    "type": "wchar_t**"
-                },
-                {
-                    "name": "str",
-                    "type": "wchar_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_SetBytesString",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                },
-                {
-                    "name": "config_str",
-                    "type": "wchar_t**"
-                },
-                {
-                    "name": "str",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_Read",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_SetBytesArgv",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                },
-                {
-                    "name": "argc",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "argv",
-                    "type": "char**"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_SetArgv",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                },
-                {
-                    "name": "argc",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "argv",
-                    "type": "wchar_t**"
-                }
-            ]
-        },
-        {
-            "name": "PyConfig_SetWideStringList",
-            "return_type": "PyStatus",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "PyConfig*"
-                },
-                {
-                    "name": "list",
-                    "type": "PyWideStringList*"
-                },
-                {
-                    "name": "length",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "items",
-                    "type": "wchar_t**"
-                }
-            ]
-        },
-        {
-            "name": "Py_GetArgcArgv",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "argc",
-                    "type": "int*"
-                },
-                {
-                    "name": "argv",
-                    "type": "wchar_t***"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_New",
-            "return_type": "PyInterpreterState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_Clear",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_Delete",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_Get",
-            "return_type": "PyInterpreterState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_GetDict",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_GetID",
-            "return_type": "int64_t",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "PyState_AddModule",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyModuleDef*"
-                }
-            ]
-        },
-        {
-            "name": "PyState_RemoveModule",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyModuleDef*"
-                }
-            ]
-        },
-        {
-            "name": "PyState_FindModule",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyModuleDef*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_New",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_Clear",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_Delete",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_Get",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_Swap",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_GetDict",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_SetAsyncExc",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "unsigned long"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_GetInterpreter",
-            "return_type": "PyInterpreterState*",
-            "parameters": [
-                {
-                    "name": "tstate",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_GetFrame",
-            "return_type": "PyFrameObject*",
-            "parameters": [
-                {
-                    "name": "tstate",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_GetID",
-            "return_type": "uint64_t",
-            "parameters": [
-                {
-                    "name": "tstate",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyGILState_Ensure",
-            "return_type": "PyGILState_STATE",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyGILState_Release",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyGILState_STATE"
-                }
-            ]
-        },
-        {
-            "name": "PyGILState_GetThisThreadState",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_RequiresIDRef",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_RequireIDRef",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                },
-                {
-                    "name": "",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_GetMainModule",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "_PyThreadState_Prealloc",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "_PyThreadState_UncheckedGet",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyThreadState_GetDict",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "tstate",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_EnterTracing",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "tstate",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_LeaveTracing",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "tstate",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyGILState_Check",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyGILState_GetInterpreterStateUnsafe",
-            "return_type": "PyInterpreterState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyThread_CurrentFrames",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyThread_CurrentExceptions",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_Main",
-            "return_type": "PyInterpreterState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_Head",
-            "return_type": "PyInterpreterState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_Next",
-            "return_type": "PyInterpreterState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "PyInterpreterState_ThreadHead",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_Next",
-            "return_type": "PyThreadState*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "PyThreadState_DeleteCurrent",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_GetEvalFrameFunc",
-            "return_type": "_PyFrameEvalFunction",
-            "parameters": [
-                {
-                    "name": "interp",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_SetEvalFrameFunc",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "interp",
-                    "type": "PyInterpreterState*"
-                },
-                {
-                    "name": "eval_frame",
-                    "type": "_PyFrameEvalFunction"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_GetConfig",
-            "return_type": "PyConfig*",
-            "parameters": [
-                {
-                    "name": "interp",
-                    "type": "PyInterpreterState*"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_GetConfigCopy",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "unknown*"
-                }
-            ]
-        },
-        {
-            "name": "_PyInterpreterState_SetConfig",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "config",
-                    "type": "unknown*"
-                }
-            ]
-        },
-        {
-            "name": "_Py_GetConfig",
-            "return_type": "PyConfig*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyObject_GetCrossInterpreterData",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "_PyCrossInterpreterData*"
-                }
-            ]
-        },
-        {
-            "name": "_PyCrossInterpreterData_NewObject",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "_PyCrossInterpreterData*"
-                }
-            ]
-        },
-        {
-            "name": "_PyCrossInterpreterData_Release",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "_PyCrossInterpreterData*"
-                }
-            ]
-        },
-        {
-            "name": "_PyObject_CheckCrossInterpreterData",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "_PyCrossInterpreterData_RegisterClass",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyTypeObject*"
-                },
-                {
-                    "name": "",
-                    "type": "crossinterpdatafunc"
-                }
-            ]
-        },
-        {
-            "name": "_PyCrossInterpreterData_Lookup",
-            "return_type": "crossinterpdatafunc",
-            "parameters": [
                 {
                     "name": "",
                     "type": "PyObject*"
@@ -9782,1184 +10960,6 @@
             "parameters": [
                 {
                     "name": "exc",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetNone",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetObject",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetString",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "exception",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "string",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_Occurred",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_Clear",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_Fetch",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_Restore",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_GetHandledException",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetHandledException",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_GetExcInfo",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetExcInfo",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_GivenExceptionMatches",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_ExceptionMatches",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_NormalizeException",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                }
-            ]
-        },
-        {
-            "name": "PyException_SetTraceback",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyException_GetTraceback",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyException_GetCause",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyException_SetCause",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyException_GetContext",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyException_SetContext",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyExceptionClass_Name",
-            "return_type": "char*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_BadArgument",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_NoMemory",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetFromErrno",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetFromErrnoWithFilenameObject",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetFromErrnoWithFilenameObjects",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetFromErrnoWithFilename",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "exc",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "filename",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_Format",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "exception",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "format",
-                    "type": "char*"
-                },
-                {
-                    "name": "",
-                    "type": "..."
-                }
-            ]
-        },
-        {
-            "name": "PyErr_FormatV",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "exception",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "format",
-                    "type": "char*"
-                },
-                {
-                    "name": "vargs",
-                    "type": "va_list"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetImportErrorSubclass",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetImportError",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_BadInternalCall",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_BadInternalCall",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "char*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_NewException",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "name",
-                    "type": "char*"
-                },
-                {
-                    "name": "base",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "dict",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_NewExceptionWithDoc",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "name",
-                    "type": "char*"
-                },
-                {
-                    "name": "doc",
-                    "type": "char*"
-                },
-                {
-                    "name": "base",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "dict",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_WriteUnraisable",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_CheckSignals",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetInterrupt",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SetInterruptEx",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "signum",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SyntaxLocation",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "char*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SyntaxLocationEx",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "char*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                },
-                {
-                    "name": "col_offset",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_ProgramText",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "char*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_Create",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "encoding",
-                    "type": "char*"
-                },
-                {
-                    "name": "object",
-                    "type": "char*"
-                },
-                {
-                    "name": "length",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "start",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "end",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "reason",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_GetEncoding",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_GetEncoding",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_GetObject",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_GetObject",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeTranslateError_GetObject",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_GetStart",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_GetStart",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeTranslateError_GetStart",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_SetStart",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_SetStart",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeTranslateError_SetStart",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_GetEnd",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_GetEnd",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeTranslateError_GetEnd",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_SetEnd",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_SetEnd",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeTranslateError_SetEnd",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "Py_ssize_t"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_GetReason",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_GetReason",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeTranslateError_GetReason",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeEncodeError_SetReason",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "exc",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "reason",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeDecodeError_SetReason",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "exc",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "reason",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyUnicodeTranslateError_SetReason",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "exc",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "reason",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "PyOS_snprintf",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "str",
-                    "type": "char*"
-                },
-                {
-                    "name": "size",
-                    "type": "size_t"
-                },
-                {
-                    "name": "format",
-                    "type": "char*"
-                },
-                {
-                    "name": "",
-                    "type": "..."
-                }
-            ]
-        },
-        {
-            "name": "PyOS_vsnprintf",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "str",
-                    "type": "char*"
-                },
-                {
-                    "name": "size",
-                    "type": "size_t"
-                },
-                {
-                    "name": "format",
-                    "type": "char*"
-                },
-                {
-                    "name": "va",
-                    "type": "va_list"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_SetKeyError",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_GetTopmostException",
-            "return_type": "_PyErr_StackItem*",
-            "parameters": [
-                {
-                    "name": "tstate",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_GetHandledException",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyThreadState*"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_SetHandledException",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyThreadState*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_GetExcInfo",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyThreadState*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject**"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_ChainExceptions",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "",
-                    "type": "PyObject*"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_FormatFromCause",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "exception",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "format",
-                    "type": "char*"
-                },
-                {
-                    "name": "",
-                    "type": "..."
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_TrySetFromCause",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "prefix_format",
-                    "type": "char*"
-                },
-                {
-                    "name": "",
-                    "type": "..."
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_CheckSignals",
-            "return_type": "int",
-            "parameters": [
-                {
-                    "name": "",
-                    "type": "void"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_SyntaxLocationObject",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                },
-                {
-                    "name": "col_offset",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_RangedSyntaxLocationObject",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                },
-                {
-                    "name": "col_offset",
-                    "type": "int"
-                },
-                {
-                    "name": "end_lineno",
-                    "type": "int"
-                },
-                {
-                    "name": "end_col_offset",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "PyErr_ProgramTextObject",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_ProgramDecodedTextObject",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "filename",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "lineno",
-                    "type": "int"
-                },
-                {
-                    "name": "encoding",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "_PyUnicodeTranslateError_Create",
-            "return_type": "PyObject*",
-            "parameters": [
-                {
-                    "name": "object",
-                    "type": "PyObject*"
-                },
-                {
-                    "name": "start",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "end",
-                    "type": "Py_ssize_t"
-                },
-                {
-                    "name": "reason",
-                    "type": "char*"
-                }
-            ]
-        },
-        {
-            "name": "_PyErr_WriteUnraisableMsg",
-            "return_type": "void",
-            "parameters": [
-                {
-                    "name": "err_msg",
-                    "type": "char*"
-                },
-                {
-                    "name": "obj",
                     "type": "PyObject*"
                 }
             ]
@@ -16130,15 +16130,16 @@
             "members": [
                 {
                     "name": "length",
-                    "type": "length",
                     "offset": 0,
-                    "size": 8
+                    "size": 8,
+                    "type": "length"
                 },
                 {
                     "name": "items",
-                    "type": "items",
                     "offset": 8,
-                    "size": 8
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "wchar_t"
                 }
             ]
         },
@@ -16148,402 +16149,402 @@
             "members": [
                 {
                     "name": "_config_init",
-                    "type": "_config_init",
                     "offset": 0,
-                    "size": 8
+                    "size": 8,
+                    "type": "_config_init"
                 },
                 {
                     "name": "isolated",
-                    "type": "isolated",
                     "offset": 8,
-                    "size": 8
+                    "size": 8,
+                    "type": "isolated"
                 },
                 {
                     "name": "use_environment",
-                    "type": "use_environment",
                     "offset": 16,
-                    "size": 8
+                    "size": 8,
+                    "type": "use_environment"
                 },
                 {
                     "name": "dev_mode",
-                    "type": "dev_mode",
                     "offset": 24,
-                    "size": 8
+                    "size": 8,
+                    "type": "dev_mode"
                 },
                 {
                     "name": "install_signal_handlers",
-                    "type": "install_signal_handlers",
                     "offset": 32,
-                    "size": 8
+                    "size": 8,
+                    "type": "install_signal_handlers"
                 },
                 {
                     "name": "use_hash_seed",
-                    "type": "use_hash_seed",
                     "offset": 40,
-                    "size": 8
+                    "size": 8,
+                    "type": "use_hash_seed"
                 },
                 {
                     "name": "hash_seed",
-                    "type": "hash_seed",
                     "offset": 48,
-                    "size": 8
+                    "size": 8,
+                    "type": "hash_seed"
                 },
                 {
                     "name": "faulthandler",
-                    "type": "faulthandler",
                     "offset": 56,
-                    "size": 8
+                    "size": 8,
+                    "type": "faulthandler"
                 },
                 {
                     "name": "tracemalloc",
-                    "type": "tracemalloc",
                     "offset": 64,
-                    "size": 8
+                    "size": 8,
+                    "type": "tracemalloc"
                 },
                 {
                     "name": "import_time",
-                    "type": "import_time",
                     "offset": 72,
-                    "size": 8
+                    "size": 8,
+                    "type": "import_time"
                 },
                 {
                     "name": "code_debug_ranges",
-                    "type": "code_debug_ranges",
                     "offset": 80,
-                    "size": 8
+                    "size": 8,
+                    "type": "code_debug_ranges"
                 },
                 {
                     "name": "show_ref_count",
-                    "type": "show_ref_count",
                     "offset": 88,
-                    "size": 8
+                    "size": 8,
+                    "type": "show_ref_count"
                 },
                 {
                     "name": "dump_refs",
-                    "type": "dump_refs",
                     "offset": 96,
-                    "size": 8
+                    "size": 8,
+                    "type": "dump_refs"
                 },
                 {
                     "name": "dump_refs_file",
-                    "type": "dump_refs_file",
                     "offset": 104,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "malloc_stats",
-                    "type": "malloc_stats",
                     "offset": 112,
-                    "size": 8
+                    "size": 8,
+                    "type": "malloc_stats"
                 },
                 {
                     "name": "filesystem_encoding",
-                    "type": "filesystem_encoding",
                     "offset": 120,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "filesystem_errors",
-                    "type": "filesystem_errors",
                     "offset": 128,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "pycache_prefix",
-                    "type": "pycache_prefix",
                     "offset": 136,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "parse_argv",
-                    "type": "parse_argv",
                     "offset": 144,
-                    "size": 8
+                    "size": 8,
+                    "type": "parse_argv"
                 },
                 {
                     "name": "orig_argv",
-                    "type": "orig_argv",
                     "offset": 152,
-                    "size": 16
+                    "size": 16,
+                    "type": "orig_argv"
                 },
                 {
                     "name": "argv",
-                    "type": "argv",
                     "offset": 168,
-                    "size": 16
+                    "size": 16,
+                    "type": "argv"
                 },
                 {
                     "name": "xoptions",
-                    "type": "xoptions",
                     "offset": 184,
-                    "size": 16
+                    "size": 16,
+                    "type": "xoptions"
                 },
                 {
                     "name": "warnoptions",
-                    "type": "warnoptions",
                     "offset": 200,
-                    "size": 16
+                    "size": 16,
+                    "type": "warnoptions"
                 },
                 {
                     "name": "site_import",
-                    "type": "site_import",
                     "offset": 216,
-                    "size": 8
+                    "size": 8,
+                    "type": "site_import"
                 },
                 {
                     "name": "bytes_warning",
-                    "type": "bytes_warning",
                     "offset": 224,
-                    "size": 8
+                    "size": 8,
+                    "type": "bytes_warning"
                 },
                 {
                     "name": "warn_default_encoding",
-                    "type": "warn_default_encoding",
                     "offset": 232,
-                    "size": 8
+                    "size": 8,
+                    "type": "warn_default_encoding"
                 },
                 {
                     "name": "inspect",
-                    "type": "inspect",
                     "offset": 240,
-                    "size": 8
+                    "size": 8,
+                    "type": "inspect"
                 },
                 {
                     "name": "interactive",
-                    "type": "interactive",
                     "offset": 248,
-                    "size": 8
+                    "size": 8,
+                    "type": "interactive"
                 },
                 {
                     "name": "optimization_level",
-                    "type": "optimization_level",
                     "offset": 256,
-                    "size": 8
+                    "size": 8,
+                    "type": "optimization_level"
                 },
                 {
                     "name": "parser_debug",
-                    "type": "parser_debug",
                     "offset": 264,
-                    "size": 8
+                    "size": 8,
+                    "type": "parser_debug"
                 },
                 {
                     "name": "write_bytecode",
-                    "type": "write_bytecode",
                     "offset": 272,
-                    "size": 8
+                    "size": 8,
+                    "type": "write_bytecode"
                 },
                 {
                     "name": "verbose",
-                    "type": "verbose",
                     "offset": 280,
-                    "size": 8
+                    "size": 8,
+                    "type": "verbose"
                 },
                 {
                     "name": "quiet",
-                    "type": "quiet",
                     "offset": 288,
-                    "size": 8
+                    "size": 8,
+                    "type": "quiet"
                 },
                 {
                     "name": "user_site_directory",
-                    "type": "user_site_directory",
                     "offset": 296,
-                    "size": 8
+                    "size": 8,
+                    "type": "user_site_directory"
                 },
                 {
                     "name": "configure_c_stdio",
-                    "type": "configure_c_stdio",
                     "offset": 304,
-                    "size": 8
+                    "size": 8,
+                    "type": "configure_c_stdio"
                 },
                 {
                     "name": "buffered_stdio",
-                    "type": "buffered_stdio",
                     "offset": 312,
-                    "size": 8
+                    "size": 8,
+                    "type": "buffered_stdio"
                 },
                 {
                     "name": "stdio_encoding",
-                    "type": "stdio_encoding",
                     "offset": 320,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "stdio_errors",
-                    "type": "stdio_errors",
                     "offset": 328,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "check_hash_pycs_mode",
-                    "type": "check_hash_pycs_mode",
                     "offset": 336,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "use_frozen_modules",
-                    "type": "use_frozen_modules",
                     "offset": 344,
-                    "size": 8
+                    "size": 8,
+                    "type": "use_frozen_modules"
                 },
                 {
                     "name": "safe_path",
-                    "type": "safe_path",
                     "offset": 352,
-                    "size": 8
+                    "size": 8,
+                    "type": "safe_path"
                 },
                 {
                     "name": "pathconfig_warnings",
-                    "type": "pathconfig_warnings",
                     "offset": 360,
-                    "size": 8
+                    "size": 8,
+                    "type": "pathconfig_warnings"
                 },
                 {
                     "name": "program_name",
-                    "type": "program_name",
                     "offset": 368,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "pythonpath_env",
-                    "type": "pythonpath_env",
                     "offset": 376,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "home",
-                    "type": "home",
                     "offset": 384,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "platlibdir",
-                    "type": "platlibdir",
                     "offset": 392,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "module_search_paths_set",
-                    "type": "module_search_paths_set",
                     "offset": 400,
-                    "size": 8
+                    "size": 8,
+                    "type": "module_search_paths_set"
                 },
                 {
                     "name": "module_search_paths",
-                    "type": "module_search_paths",
                     "offset": 408,
-                    "size": 16
+                    "size": 16,
+                    "type": "module_search_paths"
                 },
                 {
                     "name": "stdlib_dir",
-                    "type": "stdlib_dir",
                     "offset": 424,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "executable",
-                    "type": "executable",
                     "offset": 432,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "base_executable",
-                    "type": "base_executable",
                     "offset": 440,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "prefix",
-                    "type": "prefix",
                     "offset": 448,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "base_prefix",
-                    "type": "base_prefix",
                     "offset": 456,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "exec_prefix",
-                    "type": "exec_prefix",
                     "offset": 464,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "base_exec_prefix",
-                    "type": "base_exec_prefix",
                     "offset": 472,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "skip_source_first_line",
-                    "type": "skip_source_first_line",
                     "offset": 480,
-                    "size": 8
+                    "size": 8,
+                    "type": "skip_source_first_line"
                 },
                 {
                     "name": "run_command",
-                    "type": "run_command",
                     "offset": 488,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "run_module",
-                    "type": "run_module",
                     "offset": 496,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "run_filename",
-                    "type": "run_filename",
                     "offset": 504,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "wchar_t"
                 },
                 {
                     "name": "_install_importlib",
-                    "type": "_install_importlib",
                     "offset": 512,
-                    "size": 8
+                    "size": 8,
+                    "type": "_install_importlib"
                 },
                 {
                     "name": "_init_main",
-                    "type": "_init_main",
                     "offset": 520,
-                    "size": 8
+                    "size": 8,
+                    "type": "_init_main"
                 },
                 {
                     "name": "_isolated_interpreter",
-                    "type": "_isolated_interpreter",
                     "offset": 528,
-                    "size": 8
+                    "size": 8,
+                    "type": "_isolated_interpreter"
                 },
                 {
                     "name": "_is_python_build",
-                    "type": "_is_python_build",
                     "offset": 536,
-                    "size": 8
+                    "size": 8,
+                    "type": "_is_python_build"
                 }
             ]
         },
@@ -16553,63 +16554,63 @@
             "members": [
                 {
                     "name": "_config_init",
-                    "type": "_config_init",
                     "offset": 0,
-                    "size": 8
+                    "size": 8,
+                    "type": "_config_init"
                 },
                 {
                     "name": "parse_argv",
-                    "type": "parse_argv",
                     "offset": 8,
-                    "size": 8
+                    "size": 8,
+                    "type": "parse_argv"
                 },
                 {
                     "name": "isolated",
-                    "type": "isolated",
                     "offset": 16,
-                    "size": 8
+                    "size": 8,
+                    "type": "isolated"
                 },
                 {
                     "name": "use_environment",
-                    "type": "use_environment",
                     "offset": 24,
-                    "size": 8
+                    "size": 8,
+                    "type": "use_environment"
                 },
                 {
                     "name": "configure_locale",
-                    "type": "configure_locale",
                     "offset": 32,
-                    "size": 8
+                    "size": 8,
+                    "type": "configure_locale"
                 },
                 {
                     "name": "coerce_c_locale",
-                    "type": "coerce_c_locale",
                     "offset": 40,
-                    "size": 8
+                    "size": 8,
+                    "type": "coerce_c_locale"
                 },
                 {
                     "name": "coerce_c_locale_warn",
-                    "type": "coerce_c_locale_warn",
                     "offset": 48,
-                    "size": 8
+                    "size": 8,
+                    "type": "coerce_c_locale_warn"
                 },
                 {
                     "name": "utf8_mode",
-                    "type": "utf8_mode",
                     "offset": 56,
-                    "size": 8
+                    "size": 8,
+                    "type": "utf8_mode"
                 },
                 {
                     "name": "dev_mode",
-                    "type": "dev_mode",
                     "offset": 64,
-                    "size": 8
+                    "size": 8,
+                    "type": "dev_mode"
                 },
                 {
                     "name": "allocator",
-                    "type": "allocator",
                     "offset": 72,
-                    "size": 8
+                    "size": 8,
+                    "type": "allocator"
                 }
             ]
         },
@@ -16619,28 +16620,28 @@
             "members": [
                 {
                     "name": "ml_name",
-                    "type": "ml_name",
                     "offset": 0,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "char"
                 },
                 {
                     "name": "ml_meth",
-                    "type": "ml_meth",
                     "offset": 8,
-                    "size": 8
+                    "size": 8,
+                    "type": "ml_meth"
                 },
                 {
                     "name": "ml_flags",
-                    "type": "ml_flags",
                     "offset": 16,
-                    "size": 8
+                    "size": 8,
+                    "type": "ml_flags"
                 },
                 {
                     "name": "ml_doc",
-                    "type": "ml_doc",
                     "offset": 24,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "char"
                 }
             ]
@@ -16651,15 +16652,15 @@
             "members": [
                 {
                     "name": "ob_refcnt",
-                    "type": "ob_refcnt",
                     "offset": 0,
-                    "size": 8
+                    "size": 8,
+                    "type": "ob_refcnt"
                 },
                 {
                     "name": "ob_type",
-                    "type": "ob_type",
                     "offset": 8,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "PyTypeObject"
                 }
             ]
@@ -16670,28 +16671,28 @@
             "members": [
                 {
                     "name": "ob_base",
-                    "type": "ob_base",
                     "offset": 0,
-                    "size": 16
+                    "size": 16,
+                    "type": "ob_base"
                 },
                 {
                     "name": "m_init",
-                    "type": "m_init",
                     "offset": 16,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "function"
                 },
                 {
                     "name": "m_index",
-                    "type": "m_index",
                     "offset": 24,
-                    "size": 8
+                    "size": 8,
+                    "type": "m_index"
                 },
                 {
                     "name": "m_copy",
-                    "type": "m_copy",
                     "offset": 32,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "PyObject"
                 }
             ]
@@ -16702,61 +16703,61 @@
             "members": [
                 {
                     "name": "m_base",
-                    "type": "m_base",
                     "offset": 0,
-                    "size": 40
+                    "size": 40,
+                    "type": "m_base"
                 },
                 {
                     "name": "m_name",
-                    "type": "m_name",
                     "offset": 40,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "char"
                 },
                 {
                     "name": "m_doc",
-                    "type": "m_doc",
                     "offset": 48,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "char"
                 },
                 {
                     "name": "m_size",
-                    "type": "m_size",
                     "offset": 56,
-                    "size": 8
+                    "size": 8,
+                    "type": "m_size"
                 },
                 {
                     "name": "m_methods",
-                    "type": "m_methods",
                     "offset": 64,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "PyMethodDef"
                 },
                 {
                     "name": "m_slots",
-                    "type": "m_slots",
                     "offset": 72,
                     "size": 8,
+                    "type": "pointer",
                     "pointer_type": "PyModuleDef_Slot"
                 },
                 {
                     "name": "m_traverse",
-                    "type": "m_traverse",
                     "offset": 80,
-                    "size": 8
+                    "size": 8,
+                    "type": "m_traverse"
                 },
                 {
                     "name": "m_clear",
-                    "type": "m_clear",
                     "offset": 88,
-                    "size": 8
+                    "size": 8,
+                    "type": "m_clear"
                 },
                 {
                     "name": "m_free",
-                    "type": "m_free",
                     "offset": 96,
-                    "size": 8
+                    "size": 8,
+                    "type": "m_free"
                 }
             ]
         }

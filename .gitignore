@@ -39,12 +39,11 @@ micromamba/
 __pycache__/
 
 genctags/micromamba
-genctags/passone/micromamba
-genctags/passtwo/micromamba
-genctags/passone/pycparser
+genctags/ctags_parser/micromamba
+genctags/ctags_parser/pycparser
+genctags/ctags_parser/sizeof/build
 genctags/pycparser
 genctags/passtwo/pkg
 genctags/platform_ctags
-genctags/passone/sizeof/build
 
 
