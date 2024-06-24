@@ -159,7 +159,7 @@ func main() {
 	semaphore_out_obj := lib.Invoke("PyLong_FromVoidPtr", semaphore_out.GetHandle())
 
 	// add the semaphore object to the module
-	lib.Invoke("PyModule_AddObject", module, pylib.StrToPtr("semaphore_out"), semaphore_out_obj)
+	lib.Invoke("PyModule_AddObject", module, lib.StrToPtr("semaphore_out"), semaphore_out_obj)
 
 	// create a semaphore in
 	semaphore_in := sem.NewSemaphore()
@@ -169,11 +169,11 @@ func main() {
 	semaphore_in_obj := lib.Invoke("PyLong_FromVoidPtr", semaphore_in.GetHandle())
 
 	// add the semaphore object to the module
-	lib.Invoke("PyModule_AddObject", module, pylib.StrToPtr("semaphore_in"), semaphore_in_obj)
+	lib.Invoke("PyModule_AddObject", module, lib.StrToPtr("semaphore_in"), semaphore_in_obj)
 
 	// Add the module to sys.modules
 	sys_modules := lib.Invoke("PyImport_GetModuleDict")
-	lib.Invoke("PyDict_SetItemString", sys_modules, pylib.StrToPtr("example_module"), module)
+	lib.Invoke("PyDict_SetItemString", sys_modules, lib.StrToPtr("example_module"), module)
 	lib.Invoke("Py_DecRef", module)
 
 	// Wait for the semaphore to be signaled
@@ -187,7 +187,7 @@ func main() {
 	}()
 
 	// Run the Python code
-	lib.Invoke("PyRun_SimpleString", pylib.StrToPtr(quote_str))
+	lib.Invoke("PyRun_SimpleString", lib.StrToPtr(quote_str))
 
 	purego.UnrefCallbackFnPtr(&f)
 }

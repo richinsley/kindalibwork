@@ -60,12 +60,12 @@ func (p *PythonLib) NewPyModuleDef(name string, doc string, methods *PyMethodDef
 
 	// set the name field to the struct offset
 	nameoffset := pconf.GetMemberOffset("m_name")
-	n := StrToPtr(name)
+	n := p.StrToPtr(name)
 	*(*uintptr)(unsafe.Pointer(&retv.Buffer[nameoffset])) = n
 
 	// set the doc field to the struct offset
 	docoffset := pconf.GetMemberOffset("m_doc")
-	d := StrToPtr(doc)
+	d := p.StrToPtr(doc)
 	*(*uintptr)(unsafe.Pointer(&retv.Buffer[docoffset])) = d
 
 	// set the size field to the struct offset to -1 (size is an size_t)

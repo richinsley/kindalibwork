@@ -51,7 +51,7 @@ func (p PyMethodDefArray) SetMethodDef(index int, name string, meth uintptr, fla
 	nameoffset := p.PyConfig.GetMemberOffset("ml_name")
 
 	// write the n uintptr directly to the buffer at the nameoffset
-	n := StrToPtr(name)
+	n := p.PythonLib.StrToPtr(name)
 	*(*uintptr)(unsafe.Pointer(&p.Buffer[indexoffset+nameoffset])) = n
 
 	// set the meth field to the struct offset

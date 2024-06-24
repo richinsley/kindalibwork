@@ -46,7 +46,7 @@ func main() {
 	cwd, _ := os.Getwd()
 	rootDirectory := filepath.Join(cwd, "..", "micromamba")
 	fmt.Println("Creating Kinda repo at: ", rootDirectory)
-	version := "3.11"
+	version := "3.10"
 	env, err := kinda.CreateEnvironment("myenv"+version, rootDirectory, version, "conda-forge", kinda.ShowVerbose)
 	if err != nil {
 		fmt.Printf("Error creating environment: %v\n", err)
@@ -87,11 +87,11 @@ func main() {
 
 	// Add the module to sys.modules
 	sys_modules := lib.Invoke("PyImport_GetModuleDict")
-	lib.Invoke("PyDict_SetItemString", sys_modules, pylib.StrToPtr("example_module"), module)
+	lib.Invoke("PyDict_SetItemString", sys_modules, lib.StrToPtr("example_module"), module)
 	lib.Invoke("Py_DecRef", module)
 
 	// Run the Python code
-	lib.Invoke("PyRun_SimpleString", pylib.StrToPtr(quote_str))
+	lib.Invoke("PyRun_SimpleString", lib.StrToPtr(quote_str))
 
 	purego.UnrefCallbackFnPtr(&f)
 

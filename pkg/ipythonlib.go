@@ -18,6 +18,7 @@ type IPythonLib interface {
 
 	NewPyMethodDefArray(count int) PyMethodDefArray
 	NewPyModuleDef(name string, doc string, methods *PyMethodDefArray) PyModuleDef
+	StrToPtr(str string) uintptr
 }
 
 type PyFunctionParameter struct {
