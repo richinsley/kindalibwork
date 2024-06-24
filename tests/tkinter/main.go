@@ -63,6 +63,12 @@ func main() {
 
 	lib.Init("my_program")
 
+	// pylong tests
+	pylong := lib.Invoke("PyLong_FromLong", 123)
+	rval := int(lib.Invoke("PyLong_AsLong", pylong))
+	fmt.Printf("PyLong_AsLong: %d\n", rval)
+	lib.Invoke("Py_DecRef", pylong)
+
 	// set the PyNone pointer
 	// pynone is a global static PyObject* that is used to return None from C functions
 	// returning just NULL is not enough, you need to return Py_None

@@ -42,6 +42,7 @@ type PythonLib struct {
 	Calloc        InvokeFunc
 	Realloc       InvokeFunc
 	Free          InvokeFunc
+	PyNone        uintptr
 }
 
 func getFunction(functiondef PyFunction, dll uintptr) interface{} {
@@ -174,6 +175,10 @@ func (p *PythonLib) FreeString(s uintptr) {
 	p.Invoke("PyMem_Free", s)
 }
 
+func (p *PythonLib) LoadSymbol(name string) (uintptr, error) {
+	return purego.Dlsym(p.DLL, name)
+}
+
 func NewPythonLib(env *kinda.Environment) (IPythonLib, error) {
 	retv, err := NewPythonLibFromPaths(env.PythonLibPath, env.EnvPath, env.SitePackagesPath, env.PythonVersion.MinorString())
 	if err != nil {
@@ -220,10 +225,14 @@ func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version 
 		retv.FTable[k] = ptr
 	}
 
-	// retv.Malloc = retv.FTable["PyMem_Malloc"].(InvokeFunc)
-	// retv.Calloc = retv.FTable["PyMem_Calloc"].(InvokeFunc)
-	// retv.Realloc = retv.FTable["PyMem_Realloc"].(InvokeFunc)
-	// retv.Free = retv.FTable["PyMem_Free"].(InvokeFunc)
+	// py_none is a global static PyObject* that is used to return None from C functions
+	// it is available in the python library as "_Py_NoneStruct" and marked as "PyAPI_DATA(PyObject) _Py_NoneStruct;"
+	pynone, err := retv.LoadSymbol("_Py_NoneStruct")
+	if err != nil {
+		fmt.Printf("Error loading Py_None: %s\n", err.Error())
+	} else {
+		retv.PyNone = pynone
+	}
 
 	return retv, nil
 }
@@ -304,6 +313,7 @@ func (p *PythonLib) FreeBuffer(addr uintptr) {
 }
 
 func (p *PythonLib) Init(program_name string) error {
+	// Doesn't work >= 3.11 !!!
 	// we need to tell python where it's env is at
 	envpathchar := p.StrToPtr(p.Environment.EnvPath)
 	envpath := p.Invoke("Py_DecodeLocale", envpathchar, 0)
@@ -317,5 +327,5 @@ func (p *PythonLib) Init(program_name string) error {
 
 func (p *PythonLib) GetPyNone() uintptr {
 	// return uintptr(unsafe.Pointer(C.our_Py_NoneStruct))
-	return 0
+	return p.PyNone
 }
