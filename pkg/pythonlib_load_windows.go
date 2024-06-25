@@ -1,4 +1,4 @@
-//go:build lwindows
+//go:build windows
 
 package pkg
 

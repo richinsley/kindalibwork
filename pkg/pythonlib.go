@@ -1,5 +1,3 @@
-//go:build linux || darwin
-
 package pkg
 
 import (
@@ -52,50 +50,55 @@ func getFunction(functiondef PyFunction, dll uintptr) interface{} {
 		pcount = 0
 	}
 
+	fptr, err := OpenSymbol(dll, functiondef.Name)
+	if err != nil {
+		return nil
+	}
+
 	switch pcount {
 	case 0:
 		var ff InvokeFunc0
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 1:
 		var ff InvokeFunc1
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 2:
 		var ff InvokeFunc2
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 3:
 		var ff InvokeFunc3
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 4:
 		var ff InvokeFunc4
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 5:
 		var ff InvokeFunc5
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 6:
 		var ff InvokeFunc6
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 7:
 		var ff InvokeFunc7
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 8:
 		var ff InvokeFunc8
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 9:
 		var ff InvokeFunc9
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	case 10:
 		var ff InvokeFunc10
-		purego.RegisterLibFunc(&ff, dll, functiondef.Name)
+		purego.RegisterFunc(&ff, fptr)
 		return ff
 	default:
 		return nil
@@ -166,9 +169,9 @@ func (p *PythonLib) FreeString(s uintptr) {
 	p.Invoke("PyMem_Free", s)
 }
 
-func (p *PythonLib) LoadSymbol(name string) (uintptr, error) {
-	return purego.Dlsym(p.DLL, name)
-}
+// func (p *PythonLib) LoadSymbol(name string) (uintptr, error) {
+// 	return purego.Dlsym(p.DLL, name)
+// }
 
 func NewPythonLib(env *kinda.Environment) (IPythonLib, error) {
 	retv, err := NewPythonLibFromPaths(env.PythonLibPath, env.EnvPath, env.SitePackagesPath, env.PythonVersion.MinorString())
