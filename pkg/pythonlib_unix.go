@@ -46,15 +46,6 @@ type PythonLib struct {
 }
 
 func getFunction(functiondef PyFunction, dll uintptr) interface{} {
-	// if functiondef.ReturnType == "void" {
-	// 	var ff InvokeFuncVoid
-	// 	purego.RegisterLibFunc(&ff, dll, functiondef.Name)
-	// 	return ff
-	// }
-
-	// var ff InvokeFunc
-	// purego.RegisterLibFunc(&ff, dll, functiondef.Name)
-	// return ff
 	pcount := len(functiondef.Parameters)
 	if pcount == 1 && functiondef.Parameters[0].Type == "void" {
 		// some function defs indicate a single void parameter when they have no parameters
@@ -129,7 +120,7 @@ func loadPythonFunctions(libpath string, functionDefs map[string]PyFunction, fun
 	}
 	defer os.Chdir(cwd)
 
-	dll, err := purego.Dlopen(libpath, purego.RTLD_NOW|purego.RTLD_GLOBAL)
+	dll, err := loadLibrary(libpath)
 	if err != nil {
 		log.Fatalf("Failed to load library: %v", err)
 		return 0, err
