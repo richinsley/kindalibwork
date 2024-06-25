@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	kinda "github.com/richinsley/kinda/pkg"
 	pylib "github.com/richinsley/kindalib/pkg"
 )
@@ -80,7 +80,8 @@ func main() {
 
 	// create a callback function
 	var f func(uintptr, uintptr) uintptr = button_cb
-	goCallback := purego.NewCallbackFnPtr(&f)
+	// goCallback := purego.NewCallbackFnPtr(&f)
+	goCallback := purego.NewCallback(f)
 
 	// set the buttonClickPtr to meth.SetMethodDef
 	meth.SetMethodDef(0, "button_clicked", uintptr(goCallback), pylib.METH_VARARGS)
@@ -99,7 +100,7 @@ func main() {
 	// Run the Python code
 	lib.Invoke("PyRun_SimpleString", lib.StrToPtr(quote_str))
 
-	purego.UnrefCallbackFnPtr(&f)
+	// purego.UnrefCallbackFnPtr(&f)
 
 	select {}
 }

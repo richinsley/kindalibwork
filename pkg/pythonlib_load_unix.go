@@ -1,15 +1,13 @@
-//go:build linux || darwin
+//go:build darwin || freebsd || linux
 
 package pkg
 
-import (
-	"github.com/jwijenbergh/purego"
-)
+import "github.com/ebitengine/purego"
 
-func loadLibrary(libpath string) (uintptr, error) {
-	dll, err := purego.Dlopen(libpath, purego.RTLD_NOW|purego.RTLD_GLOBAL)
-	if err != nil {
-		return 0, err
-	}
-	return dll, nil
+func OpenLibrary(name string) (uintptr, error) {
+	return purego.Dlopen(name, purego.RTLD_NOW|purego.RTLD_GLOBAL)
+}
+
+func OpenSymbol(lib uintptr, name string) (uintptr, error) {
+	return purego.Dlsym(lib, name)
 }

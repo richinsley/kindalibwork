@@ -8,7 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	kinda "github.com/richinsley/kinda/pkg"
 	pylib "github.com/richinsley/kindalib/pkg"
 	sem "github.com/richinsley/kindalib/pkg/semaphore"

@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"unsafe"
 
-	"github.com/jwijenbergh/purego"
+	"github.com/ebitengine/purego"
 	kinda "github.com/richinsley/kinda/pkg"
 )
 
@@ -120,7 +120,7 @@ func loadPythonFunctions(libpath string, functionDefs map[string]PyFunction, fun
 	}
 	defer os.Chdir(cwd)
 
-	dll, err := loadLibrary(libpath)
+	dll, err := OpenLibrary(libpath)
 	if err != nil {
 		log.Fatalf("Failed to load library: %v", err)
 		return 0, err
@@ -218,7 +218,7 @@ func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version 
 
 	// py_none is a global static PyObject* that is used to return None from C functions
 	// it is available in the python library as "_Py_NoneStruct" and marked as "PyAPI_DATA(PyObject) _Py_NoneStruct;"
-	pynone, err := retv.LoadSymbol("_Py_NoneStruct")
+	pynone, err := OpenSymbol(dll, "_Py_NoneStruct")
 	if err != nil {
 		fmt.Printf("Error loading Py_None: %s\n", err.Error())
 	} else {
