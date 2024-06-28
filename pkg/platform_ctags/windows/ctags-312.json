@@ -17796,6 +17796,552 @@
                     "type": "m_free"
                 }
             ]
+        },
+        "PyVarObject": {
+            "name": "PyVarObject",
+            "size": 24,
+            "members": [
+                {
+                    "name": "ob_base",
+                    "offset": 0,
+                    "size": 16,
+                    "type": "ob_base"
+                },
+                {
+                    "name": "ob_size",
+                    "offset": 16,
+                    "size": 8,
+                    "type": "ob_size"
+                }
+            ]
+        },
+        "PyTypeObject": {
+            "name": "PyTypeObject",
+            "size": 416,
+            "members": [
+                {
+                    "name": "ob_base",
+                    "offset": 0,
+                    "size": 24,
+                    "type": "ob_base"
+                },
+                {
+                    "name": "tp_name",
+                    "offset": 24,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                },
+                {
+                    "name": "tp_basicsize",
+                    "offset": 32,
+                    "size": 8,
+                    "type": "tp_basicsize"
+                },
+                {
+                    "name": "tp_itemsize",
+                    "offset": 40,
+                    "size": 8,
+                    "type": "tp_itemsize"
+                },
+                {
+                    "name": "tp_dealloc",
+                    "offset": 48,
+                    "size": 8,
+                    "type": "tp_dealloc"
+                },
+                {
+                    "name": "tp_vectorcall_offset",
+                    "offset": 56,
+                    "size": 8,
+                    "type": "tp_vectorcall_offset"
+                },
+                {
+                    "name": "tp_getattr",
+                    "offset": 64,
+                    "size": 8,
+                    "type": "tp_getattr"
+                },
+                {
+                    "name": "tp_setattr",
+                    "offset": 72,
+                    "size": 8,
+                    "type": "tp_setattr"
+                },
+                {
+                    "name": "tp_as_async",
+                    "offset": 80,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyAsyncMethods"
+                },
+                {
+                    "name": "tp_repr",
+                    "offset": 88,
+                    "size": 8,
+                    "type": "tp_repr"
+                },
+                {
+                    "name": "tp_as_number",
+                    "offset": 96,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyNumberMethods"
+                },
+                {
+                    "name": "tp_as_sequence",
+                    "offset": 104,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PySequenceMethods"
+                },
+                {
+                    "name": "tp_as_mapping",
+                    "offset": 112,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyMappingMethods"
+                },
+                {
+                    "name": "tp_hash",
+                    "offset": 120,
+                    "size": 8,
+                    "type": "tp_hash"
+                },
+                {
+                    "name": "tp_call",
+                    "offset": 128,
+                    "size": 8,
+                    "type": "tp_call"
+                },
+                {
+                    "name": "tp_str",
+                    "offset": 136,
+                    "size": 8,
+                    "type": "tp_str"
+                },
+                {
+                    "name": "tp_getattro",
+                    "offset": 144,
+                    "size": 8,
+                    "type": "tp_getattro"
+                },
+                {
+                    "name": "tp_setattro",
+                    "offset": 152,
+                    "size": 8,
+                    "type": "tp_setattro"
+                },
+                {
+                    "name": "tp_as_buffer",
+                    "offset": 160,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyBufferProcs"
+                },
+                {
+                    "name": "tp_flags",
+                    "offset": 168,
+                    "size": 8,
+                    "type": "tp_flags"
+                },
+                {
+                    "name": "tp_doc",
+                    "offset": 176,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                },
+                {
+                    "name": "tp_traverse",
+                    "offset": 184,
+                    "size": 8,
+                    "type": "tp_traverse"
+                },
+                {
+                    "name": "tp_clear",
+                    "offset": 192,
+                    "size": 8,
+                    "type": "tp_clear"
+                },
+                {
+                    "name": "tp_richcompare",
+                    "offset": 200,
+                    "size": 8,
+                    "type": "tp_richcompare"
+                },
+                {
+                    "name": "tp_weaklistoffset",
+                    "offset": 208,
+                    "size": 8,
+                    "type": "tp_weaklistoffset"
+                },
+                {
+                    "name": "tp_iter",
+                    "offset": 216,
+                    "size": 8,
+                    "type": "tp_iter"
+                },
+                {
+                    "name": "tp_iternext",
+                    "offset": 224,
+                    "size": 8,
+                    "type": "tp_iternext"
+                },
+                {
+                    "name": "tp_methods",
+                    "offset": 232,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyMethodDef"
+                },
+                {
+                    "name": "tp_members",
+                    "offset": 240,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyMemberDef"
+                },
+                {
+                    "name": "tp_getset",
+                    "offset": 248,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyGetSetDef"
+                },
+                {
+                    "name": "tp_base",
+                    "offset": 256,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyTypeObject"
+                },
+                {
+                    "name": "tp_dict",
+                    "offset": 264,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyObject"
+                },
+                {
+                    "name": "tp_descr_get",
+                    "offset": 272,
+                    "size": 8,
+                    "type": "tp_descr_get"
+                },
+                {
+                    "name": "tp_descr_set",
+                    "offset": 280,
+                    "size": 8,
+                    "type": "tp_descr_set"
+                },
+                {
+                    "name": "tp_dictoffset",
+                    "offset": 288,
+                    "size": 8,
+                    "type": "tp_dictoffset"
+                },
+                {
+                    "name": "tp_init",
+                    "offset": 296,
+                    "size": 8,
+                    "type": "tp_init"
+                },
+                {
+                    "name": "tp_alloc",
+                    "offset": 304,
+                    "size": 8,
+                    "type": "tp_alloc"
+                },
+                {
+                    "name": "tp_new",
+                    "offset": 312,
+                    "size": 8,
+                    "type": "tp_new"
+                },
+                {
+                    "name": "tp_free",
+                    "offset": 320,
+                    "size": 8,
+                    "type": "tp_free"
+                },
+                {
+                    "name": "tp_is_gc",
+                    "offset": 328,
+                    "size": 8,
+                    "type": "tp_is_gc"
+                },
+                {
+                    "name": "tp_bases",
+                    "offset": 336,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyObject"
+                },
+                {
+                    "name": "tp_mro",
+                    "offset": 344,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyObject"
+                },
+                {
+                    "name": "tp_cache",
+                    "offset": 352,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyObject"
+                },
+                {
+                    "name": "tp_subclasses",
+                    "offset": 360,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "void"
+                },
+                {
+                    "name": "tp_weaklist",
+                    "offset": 368,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyObject"
+                },
+                {
+                    "name": "tp_del",
+                    "offset": 376,
+                    "size": 8,
+                    "type": "tp_del"
+                },
+                {
+                    "name": "tp_version_tag",
+                    "offset": 384,
+                    "size": 8,
+                    "type": "tp_version_tag"
+                },
+                {
+                    "name": "tp_finalize",
+                    "offset": 392,
+                    "size": 8,
+                    "type": "tp_finalize"
+                },
+                {
+                    "name": "tp_vectorcall",
+                    "offset": 400,
+                    "size": 8,
+                    "type": "tp_vectorcall"
+                },
+                {
+                    "name": "tp_watched",
+                    "offset": 408,
+                    "size": 8,
+                    "type": "tp_watched"
+                }
+            ]
+        },
+        "PyMemberDef": {
+            "name": "PyMemberDef",
+            "size": 40,
+            "members": [
+                {
+                    "name": "name",
+                    "offset": 0,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                },
+                {
+                    "name": "type",
+                    "offset": 8,
+                    "size": 8,
+                    "type": "type"
+                },
+                {
+                    "name": "offset",
+                    "offset": 16,
+                    "size": 8,
+                    "type": "offset"
+                },
+                {
+                    "name": "flags",
+                    "offset": 24,
+                    "size": 8,
+                    "type": "flags"
+                },
+                {
+                    "name": "doc",
+                    "offset": 32,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                }
+            ]
+        },
+        "PyGetSetDef": {
+            "name": "PyGetSetDef",
+            "size": 40,
+            "members": [
+                {
+                    "name": "name",
+                    "offset": 0,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                },
+                {
+                    "name": "get",
+                    "offset": 8,
+                    "size": 8,
+                    "type": "get"
+                },
+                {
+                    "name": "set",
+                    "offset": 16,
+                    "size": 8,
+                    "type": "set"
+                },
+                {
+                    "name": "doc",
+                    "offset": 24,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                },
+                {
+                    "name": "closure",
+                    "offset": 32,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "void"
+                }
+            ]
+        },
+        "PyStructSequence_Desc": {
+            "name": "PyStructSequence_Desc",
+            "size": 32,
+            "members": [
+                {
+                    "name": "name",
+                    "offset": 0,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                },
+                {
+                    "name": "doc",
+                    "offset": 8,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "char"
+                },
+                {
+                    "name": "fields",
+                    "offset": 16,
+                    "size": 8,
+                    "type": "pointer",
+                    "pointer_type": "PyStructSequence_Field"
+                },
+                {
+                    "name": "n_in_sequence",
+                    "offset": 24,
+                    "size": 8,
+                    "type": "n_in_sequence"
+                }
+            ]
         }
+    },
+    "PyData": {
+        "PyLong_Type": "PyTypeObject",
+        "PyBool_Type": "PyTypeObject",
+        "PyType_Type": "PyTypeObject",
+        "PyBaseObject_Type": "PyTypeObject",
+        "PySuper_Type": "PyTypeObject",
+        "_Py_NoneStruct": "PyObject",
+        "_Py_NotImplementedStruct": "PyObject",
+        "_PyNone_Type": "PyTypeObject",
+        "_PyNotImplemented_Type": "PyTypeObject",
+        "PyByteArray_Type": "PyTypeObject",
+        "PyByteArrayIter_Type": "PyTypeObject",
+        "PyBytes_Type": "PyTypeObject",
+        "PyBytesIter_Type": "PyTypeObject",
+        "PyUnicode_Type": "PyTypeObject",
+        "PyUnicodeIter_Type": "PyTypeObject",
+        "PyFloat_Type": "PyTypeObject",
+        "PyComplex_Type": "PyTypeObject",
+        "PyRange_Type": "PyTypeObject",
+        "PyRangeIter_Type": "PyTypeObject",
+        "PyLongRangeIter_Type": "PyTypeObject",
+        "PyMemoryView_Type": "PyTypeObject",
+        "_PyManagedBuffer_Type": "PyTypeObject",
+        "PyTuple_Type": "PyTypeObject",
+        "PyTupleIter_Type": "PyTypeObject",
+        "PyList_Type": "PyTypeObject",
+        "PyListIter_Type": "PyTypeObject",
+        "PyListRevIter_Type": "PyTypeObject",
+        "PyDict_Type": "PyTypeObject",
+        "PyDictKeys_Type": "PyTypeObject",
+        "PyDictValues_Type": "PyTypeObject",
+        "PyDictItems_Type": "PyTypeObject",
+        "PyDictIterKey_Type": "PyTypeObject",
+        "PyDictIterValue_Type": "PyTypeObject",
+        "PyDictIterItem_Type": "PyTypeObject",
+        "PyDictRevIterKey_Type": "PyTypeObject",
+        "PyDictRevIterItem_Type": "PyTypeObject",
+        "PyDictRevIterValue_Type": "PyTypeObject",
+        "PyODict_Type": "PyTypeObject",
+        "PyODictIter_Type": "PyTypeObject",
+        "PyODictKeys_Type": "PyTypeObject",
+        "PyODictItems_Type": "PyTypeObject",
+        "PyODictValues_Type": "PyTypeObject",
+        "PyEnum_Type": "PyTypeObject",
+        "PyReversed_Type": "PyTypeObject",
+        "PySet_Type": "PyTypeObject",
+        "PyFrozenSet_Type": "PyTypeObject",
+        "PySetIter_Type": "PyTypeObject",
+        "PyCFunction_Type": "PyTypeObject",
+        "PyCMethod_Type": "PyTypeObject",
+        "PyModule_Type": "PyTypeObject",
+        "PyModuleDef_Type": "PyTypeObject",
+        "PyFunction_Type": "PyTypeObject",
+        "PyClassMethod_Type": "PyTypeObject",
+        "PyStaticMethod_Type": "PyTypeObject",
+        "PyMethod_Type": "PyTypeObject",
+        "PyInstanceMethod_Type": "PyTypeObject",
+        "PyStdPrinter_Type": "PyTypeObject",
+        "PyCapsule_Type": "PyTypeObject",
+        "PyCode_Type": "PyTypeObject",
+        "PyFrame_Type": "PyTypeObject",
+        "PyTraceBack_Type": "PyTypeObject",
+        "_Py_EllipsisObject": "PyObject",
+        "PySlice_Type": "PyTypeObject",
+        "PyEllipsis_Type": "PyTypeObject",
+        "PyCell_Type": "PyTypeObject",
+        "PySeqIter_Type": "PyTypeObject",
+        "PyCallIter_Type": "PyTypeObject",
+        "PyGen_Type": "PyTypeObject",
+        "PyCoro_Type": "PyTypeObject",
+        "_PyCoroWrapper_Type": "PyTypeObject",
+        "PyAsyncGen_Type": "PyTypeObject",
+        "_PyAsyncGenASend_Type": "PyTypeObject",
+        "_PyAsyncGenWrappedValue_Type": "PyTypeObject",
+        "_PyAsyncGenAThrow_Type": "PyTypeObject",
+        "PyClassMethodDescr_Type": "PyTypeObject",
+        "PyGetSetDescr_Type": "PyTypeObject",
+        "PyMemberDescr_Type": "PyTypeObject",
+        "PyMethodDescr_Type": "PyTypeObject",
+        "PyWrapperDescr_Type": "PyTypeObject",
+        "PyDictProxy_Type": "PyTypeObject",
+        "PyProperty_Type": "PyTypeObject",
+        "_PyMethodWrapper_Type": "PyTypeObject",
+        "Py_GenericAliasType": "PyTypeObject",
+        "_PyWeakref_RefType": "PyTypeObject",
+        "_PyWeakref_ProxyType": "PyTypeObject",
+        "_PyWeakref_CallableProxyType": "PyTypeObject",
+        "PyPickleBuffer_Type": "PyTypeObject",
+        "PyContext_Type": "PyTypeObject",
+        "PyContextVar_Type": "PyTypeObject",
+        "PyContextToken_Type": "PyTypeObject",
+        "PyFilter_Type": "PyTypeObject",
+        "PyMap_Type": "PyTypeObject",
+        "PyZip_Type": "PyTypeObject"
     }
 }

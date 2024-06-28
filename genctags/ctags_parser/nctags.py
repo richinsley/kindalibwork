@@ -228,7 +228,7 @@ class TypeDaggerNode(DaggerNode):
 # This list is used to filter out the structs that we are interested in
 # When adding a new struct to the list, if the struct contains a non-pointer member of a struct type,
 # that struct should also be added to the list.  
-structlist = ['PyConfig', 'PyPreConfig', 'PyMethodDef', 'PyModuleDef']
+structlist = ['PyConfig', 'PyPreConfig', 'PyMethodDef', 'PyModuleDef', 'PyTypeObject', 'PyObject', 'PyMemberDef', 'PyGetSetDef', 'PyStructSequence_Desc']
 
 # intrinsic types and the sizes for 64-bit systems
 intrinsic_types = {
@@ -491,8 +491,15 @@ def find_prototypes_by_search_string(header_info, search_string):
     return prototype_names, deprecated_names
 
 def preprocess_and_parse(fake_header_file_path: str, header_file_path: str) -> c_ast.FileAST:
-    pyheader = os.path.join(header_file_path, "Python.h")
-    structmember = os.path.join(header_file_path, "structmember.h")
+    # write a stub file to include the necessary headers into the header_file_path
+    pyheader = os.path.join(header_file_path, "ctags_stub.h")
+    stub = """
+    #include <Python.h>
+    #include <structmember.h>
+"""
+    with open(pyheader, "w") as f:
+        f.write(stub)
+
     fake_libc_include = os.path.join(os.path.dirname(c_parser.__file__), 'fake_libc_include')
 
     cmd = None
@@ -512,44 +519,55 @@ def preprocess_and_parse(fake_header_file_path: str, header_file_path: str) -> c
 
     return ast
 
-# class PyAPIDataFinder(c_ast.NodeVisitor):
-#     def __init__(self):
-#         self.api_data_info = []
-#         self.api_data_types = ['PyTypeObject', 'PyObject', 'PyMethodDef', 'PyModuleDef', 'PyMemberDef', 'PyGetSetDef', 'PyStructSequence_Desc']
-#         self.current_depth = 0
+class PyAPIDataFinder(c_ast.NodeVisitor):
+    def __init__(self):
+        self.api_data_info = []
+        self.api_data_types = ['PyTypeObject', 'PyObject', 'PyMethodDef', 'PyModuleDef', 'PyMemberDef', 'PyGetSetDef', 'PyStructSequence_Desc']
+        self.current_depth = 0
+        self.files = {}
 
-#     def visit_FuncDef(self, node):
-#         self.current_depth += 1
-#         self.generic_visit(node)
-#         self.current_depth -= 1
+    def visit_FuncDef(self, node):
+        self.current_depth += 1
+        self.generic_visit(node)
+        self.current_depth -= 1
 
-#     def visit_Compound(self, node):
-#         self.current_depth += 1
-#         self.generic_visit(node)
-#         self.current_depth -= 1
+    def visit_Compound(self, node):
+        self.current_depth += 1
+        self.generic_visit(node)
+        self.current_depth -= 1
 
-#     def visit_Decl(self, node):
-#         # Check if this is a top-level (global) declaration
-#         if self.current_depth == 0:
-#             type_name = self.get_type(node.type)
-#             base_type = type_name.rstrip('* \t')  # Remove trailing '*', spaces, and tabs
-#             if base_type in self.api_data_types:
-#                 data_info = {
-#                     'name': node.name,
-#                     'type': type_name
-#                 }
-#                 self.api_data_info.append(data_info)
-#                 print(f"Found potential PyAPI_DATA: {node.name} of type {type_name}")
+    def visit_Decl(self, node):
+        # Check if this is a top-level (global) declaration
+        if self.current_depth == 0:
+            type_name = self.get_type(node.type)
+            base_type = type_name.rstrip('* \t')  # Remove trailing '*', spaces, and tabs
+            if base_type in self.api_data_types:
+                data_info = {
+                    'name': node.name,
+                    'type': type_name
+                }
+                # read the line of code from the source file
+                if node.coord.file not in self.files:
+                    with open(node.coord.file, 'r') as f:
+                        self.files[node.coord.file] = f.readlines()
 
-#     def get_type(self, node):
-#         if isinstance(node, c_ast.TypeDecl):
-#             return self.get_type(node.type)
-#         elif isinstance(node, c_ast.IdentifierType):
-#             return ' '.join(node.names)
-#         elif isinstance(node, c_ast.PtrDecl):
-#             return self.get_type(node.type) + '*'
-#         else:
-#             return 'unknown'
+                data_info['line'] = self.files[node.coord.file][node.coord.line - 1]
+                # PyAPI_DATA declarations have the form: PyAPI_DATA(PyTypeObject) PyFloat_Type;
+                # Use a regex to match the type and name of the declaration from the line and store it in the data_info dictionary
+                match = re.match(rf'PyAPI_DATA\({base_type}\)\s+{node.name};', data_info['line'])
+                if match:
+                    self.api_data_info.append(data_info)
+                    print(f"Found potential PyAPI_DATA: {node.name} of type {type_name}")
+
+    def get_type(self, node):
+        if isinstance(node, c_ast.TypeDecl):
+            return self.get_type(node.type)
+        elif isinstance(node, c_ast.IdentifierType):
+            return ' '.join(node.names)
+        elif isinstance(node, c_ast.PtrDecl):
+            return self.get_type(node.type) + '*'
+        else:
+            return 'unknown'
         
 class FunctionFinder(c_ast.NodeVisitor):
     def __init__(self, prototypes):
@@ -653,6 +671,9 @@ class TypeFinder(c_ast.NodeVisitor):
             print("Anonymous struct")
 
     def visit_Typedef(self, node):
+        if node.name == 'PyMemberDef':
+            print("PyMemberDef")
+
         ntype = self.get_type(node.type)
         # check if we need to lookup the actual int type
         if ntype['type'] == 'TypeDecl' and ntype['value']['name'] == 'int':
@@ -973,9 +994,9 @@ def main():
     finder = FunctionFinder(found_prototypes)
     finder.visit(ast)
 
-    # # Create an instance of PyAPIDataFinder
-    # api_data_finder = PyAPIDataFinder()
-    # api_data_finder.visit(ast)
+    # Create an instance of PyAPIDataFinder
+    api_data_finder = PyAPIDataFinder()
+    api_data_finder.visit(ast)
 
     # After parsing the AST with preprocess_and_parse
     type_finder = TypeFinder()
@@ -1192,9 +1213,14 @@ def main():
                         }
                         PyStructs[node.name] = sinfo
 
+    PyData = {}
+    for data in api_data_finder.api_data_info:
+        PyData[data['name']] = data['type']
+
     combined_info = {
         'PyFunctions': finder.functions_info,
-        'PyStructs': PyStructs
+        'PyStructs': PyStructs,
+        'PyData': PyData,
     }
 
     # Convert the functions and struct info to JSON

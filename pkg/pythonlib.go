@@ -40,6 +40,7 @@ type PythonLib struct {
 	Calloc        InvokeFunc
 	Realloc       InvokeFunc
 	Free          InvokeFunc
+	PyData        map[string]uintptr
 	PyNone        uintptr
 }
 
@@ -165,6 +166,25 @@ func (p *PythonLib) StrToPtr(str string) uintptr {
 	return addr
 }
 
+func (p *PythonLib) PtrToStr(ptr uintptr) string {
+	// Find the length of the string
+	length := 0
+	for {
+		if *(*byte)(unsafe.Pointer(ptr + uintptr(length))) == 0 {
+			break
+		}
+		length++
+	}
+
+	// Copy the bytes to a Go byte slice
+	bytes := make([]byte, length)
+	for i := 0; i < length; i++ {
+		bytes[i] = *(*byte)(unsafe.Pointer(ptr + uintptr(i)))
+	}
+
+	return string(bytes)
+}
+
 func (p *PythonLib) FreeString(s uintptr) {
 	p.Invoke("PyMem_Free", s)
 }
@@ -219,14 +239,22 @@ func NewPythonLibFromPaths(libpath string, pyhome string, pypkg string, version 
 		retv.FTable[k] = ptr
 	}
 
-	// py_none is a global static PyObject* that is used to return None from C functions
-	// it is available in the python library as "_Py_NoneStruct" and marked as "PyAPI_DATA(PyObject) _Py_NoneStruct;"
-	pynone, err := OpenSymbol(dll, "_Py_NoneStruct")
-	if err != nil {
-		fmt.Printf("Error loading Py_None: %s\n", err.Error())
-	} else {
-		retv.PyNone = pynone
+	// load PyAPI_DATA symbols
+	retv.PyData = make(map[string]uintptr)
+	for k, v := range retv.CTags.PyData {
+		sym, err := OpenSymbol(dll, k)
+		if err != nil {
+			fmt.Printf("Error loading PyAPI_DATA symbol %s: %s\n", v, err.Error())
+		} else {
+			retv.PyData[k] = sym
+		}
 	}
+
+	// py_none is a global static PyObject* that is used to return None from C functions
+	// it is available in the python library as "_Py_NoneStruct" and marked as:
+	// "PyAPI_DATA(PyObject) _Py_NoneStruct;"
+	// #define Py_None (&_Py_NoneStruct)
+	retv.PyNone = retv.PyData["_Py_NoneStruct"]
 
 	return retv, nil
 }
@@ -320,6 +348,5 @@ func (p *PythonLib) Init(program_name string) error {
 }
 
 func (p *PythonLib) GetPyNone() uintptr {
-	// return uintptr(unsafe.Pointer(C.our_Py_NoneStruct))
 	return p.PyNone
 }

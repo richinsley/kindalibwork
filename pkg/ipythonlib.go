@@ -19,6 +19,7 @@ type IPythonLib interface {
 	NewPyMethodDefArray(count int) PyMethodDefArray
 	NewPyModuleDef(name string, doc string, methods *PyMethodDefArray) PyModuleDef
 	StrToPtr(str string) uintptr
+	PtrToStr(ptr uintptr) string
 }
 
 type PyFunctionParameter struct {
@@ -65,8 +66,9 @@ type PyStructs struct {
 }
 
 type PyCtags struct {
-	Functions []PyFunction `json:"PyFunctions"`
-	PyStructs PyStructs    `json:"PyStructs"`
+	Functions []PyFunction      `json:"PyFunctions"`
+	PyStructs PyStructs         `json:"PyStructs"`
+	PyData    map[string]string `json:"PyData"`
 }
 
 type WcharPtr uintptr
